@@ -1,0 +1,35 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+.w-mycollect-tablehead th {
+  color: #494949;
+  text-align: center;
+}
+
+.w-mycollect-tablebody tr td {
+  min-height: 180px;
+  justify-content: center;
+  text-align: center;
+}
+
+.w-collect-pics {
+  width: 120px;
+  height: 120px;
+}
+.w-collect-prod {
+  text-align: left;
+
+  .w-collect-prod span {
+    color: #494949;
+    margin-bottom: 5px;
+  }
+
+  .w-collect-prod span:hover {
+    color: #a8ae91;
+  }
+}
+
+.w-collect-prod p {
+  font-size: 14px;
+  color: #838383;
+  margin-bottom: 3px;
+}
