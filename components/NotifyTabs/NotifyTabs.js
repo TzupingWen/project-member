@@ -12,20 +12,7 @@ function NotifyTabs() {
     const [ordersNotify, setOrdersNotify] = useState([])
     const [lessonNotify, setLessonNotify] = useState([])
 
-
-    // useEffect(()=>{
-    //     // 用removeChild移除
-    //     const pObj = document.getElementsByClassName('w-notifydiv')
-    //     console.log(pObj)
-    //     const rObj = document.getElementById('w-notifytbodytr1')
-    //     console.log(rObj)
-    //     const Btn = document.getElementById('w-rrrmove')
-
-    //     // Btn.addEventListener("click", () => {
-    //     //     pObj.removeChild(rObj);
-    //     //   });
-
-    // },[])
+    
 
     async function deleteMembers(id){
         try {

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import './SignUp.scss'
-import {withRouter, useHistory} from 'react-router-dom'
+import {useParams,useHistory} from 'react-router-dom'
 
-function SignUp() {
+function SignUp(props) {
   // const [members, setMembers] = useState([])
 
   const [member_Account, setMember_Account] = useState('')
@@ -10,51 +10,76 @@ function SignUp() {
   const [member_Gender, setMember_Gender] = useState('')
   const [member_Birthdate, setMember_Birthdate] = useState('')
 
+
+  let {id} = useParams()
   let history = useHistory()
 
-  // async function updateMember() {
-  //   // 要送到伺服器的data
-  //   const newMember = {
-  //     member_Account,
-  //     member_Password,
-  //     member_Gender,
-  //     member_Birthdate
-  //   }
+  async function addMember() {
+    const newMember = {
+      member_Account,
+      member_Password,
+      member_Gender,
+      member_Birthdate
+    }
+    try {
+      const response = await fetch(
+        'http://localhost:3001/members',
+        {
+          method: 'post',
+          body: JSON.stringify(newMember),
+          headers:{
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          }
+        }
+      )
+      if (response.ok){
+        const data = await response.json()
+        console.log(data)
 
-  //   try {
-  //     //伺服器端
-  //     const response = await fetch(
-  //       'http://localhost:3001/members/add',
-  //       {
-  //         method: 'post',
-  //         body: JSON.stringify(newMember),
-  //         headers: {
-  //           Accept: 'application/json',
-  //           'Content-Type': 'application/json',
-  //         },
-  //       }
-  //     )
+        history.push('/member')
+      }
+    } catch(error){
+      console.log(error)
+    }
+  }
 
-  //     if (response.ok) {
-  //       const data = await response.json()
-  //       console.log(data)
+  async function getMember(id) {
+    try {
+      //伺服器端
+      const response = await fetch(
+        'http://localhost:3001/members/get' + id,
+        {
+          method: 'get',
+        }
+      )
 
-  //       history.push('/members')
-  //     }
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
+      if (response.ok) {
+        const data = await response.json()
+        
+        setMember_Account(data.member_Account)
+        setMember_Password(data.member_Password)
+        setMember_Gender(data.member_Gender)
+        setMember_Birthdate(data.member_Birthdate)
+
+        console.log(data)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
 
   useEffect(()=>{
-    // updateMember()
-  },[])
+    if(props.type === true){
+      getMember(id)
+    }
+  },[props.type, id])
 
     return (
         <>
         <div className="w-container__form w-signup01">
-      <form action="#" className="w-form" id="form1">
+      <form action="" className="w-form" id="form1">
         <h2 className="w-form__title">註冊 Sign Up</h2>
         <div className="form-group">
           <label htmlFor="">建立帳號 Account</label>
@@ -125,6 +150,9 @@ function SignUp() {
         </div>
         <button
           className="w-btn-clicksend"
+          onClick={()=>{
+            addMember()
+          }}
           >
           確認送出 Send
           </button>
@@ -138,4 +166,4 @@ function SignUp() {
     )
 }
 
-export default withRouter(SignUp)
+export default SignUp

@@ -8,7 +8,6 @@ import Pagination from '../Pagination/Pagination'
 function LessonBookinglist(props) {
     const [lessonbookings, setLessonbookings] = useState([])
 
-
     async function deleteMember() {
         try {
             const response = await fetch (
