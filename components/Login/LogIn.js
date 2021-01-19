@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 
 function LogIn(props) {
-
+  const {isAuth, setIsAuth} = props
   
     return (
         <>

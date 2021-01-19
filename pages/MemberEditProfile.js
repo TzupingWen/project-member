@@ -6,6 +6,9 @@ import MemberContent from '../components/MemberContent/MemberContent'
 import ProfileEdit from '../components/ProfileEdit/ProfileEdit'
 import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
 
+// 測試編輯資料
+import ProfileEdittest from '../components/ProfileEdit/ProfileEdittest'
+
 function MemberEdit() {
 
     return (
@@ -18,7 +21,12 @@ function MemberEdit() {
                 <MemberContent />
             </div>
             <div className="w-article">
-                <ProfileEdit />
+                {/* <ProfileEdit /> */}
+
+                {/* 測試資料 */}
+                <ProfileEdittest />
+                {/* 測試資料 */}
+
             </div>
             </section>
         </>

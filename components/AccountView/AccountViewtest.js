@@ -1,12 +1,17 @@
 import React, {useState,useEffect} from 'react'
 import { NavLink } from 'react-router-dom'
 import './AccountView.scss'
-// import {useHistory} from 'react-router-dom'
+import {useParams,useHistory} from 'react-router-dom'
 
 // 此頁為測試資料
 // 
 function AccountViewtest() {
-    const [members, setMembers] = useState([])
+    const [members, setMembers] = useState('AccountViewtest')
+    // 是否連到members資料?
+    console.log('members?:',members); 
+
+    const [member, setMember] = useState('')
+
     
     // const initialMember = {
     //     member_Account:"",
@@ -17,20 +22,17 @@ function AccountViewtest() {
     //     member_Address:""
     // }
     
-    
-    // const [member, setMember] = useState('')
 
-    // const [member_Account, setMember_Account] = useState('')
-    // const [member_Name, setMember_Name] = useState('')
-    // const [member_Gender, setMember_Gender] = useState('')
-    // const [member_Phone, setMember_Phone] = useState('')
-    // const [member_Birthdate, setMember_Birthdate] = useState('')
-    // const [member_Address, setMember_Address] = useState('')
+    const [member_Account, setMember_Account] = useState('')
+    const [member_Name, setMember_Name] = useState('')
+    const [member_Gender, setMember_Gender] = useState('')
+    const [member_Phone, setMember_Phone] = useState('')
+    const [member_Birthdate, setMember_Birthdate] = useState('')
+    const [member_Address, setMember_Address] = useState('')
 
     // let {id} = useParams()
-    // let history = useHistory()
 
-    async function getMember() {
+    async function getMembers() {
         try {
             const response = await fetch(
                 'http://localhost:3001/members',
@@ -40,6 +42,7 @@ function AccountViewtest() {
             )
             if(response.ok) {
                 const data = await response.json()
+                console.log('data:',data)
 
                 setMembers(data)
             }
@@ -48,34 +51,36 @@ function AccountViewtest() {
         }
     }
 
-    // async function getMember(id) {
-    //     try {
-    //         const response = await fetch(
-    //             'http://localhost:3001/members/get/' + id,
-    //             {
-    //                 method:'get',
-    //             }
-    //         )
-    //         if(response.ok) {
-    //             const data = await response.json()
+    // 無法取得特定id的會員
+    async function getMember(id) {
+        try {
+            const response = await fetch(
+                'http://localhost:3001/members/get/${id}',
+                {
+                    method:'get',
+                }
+            )
+            if(response.ok) {
+                const data2 = await response.json()
+                console.log('?:',data2) 
                 
-    //             setMember(data)
-    //         }
-    //     } catch(error) {
-    //         alert('no data, try later')
-    //     }
-    // }
+                setMember(data2)
+                // console.log('???:',data);
+            }
+        } catch(error) {
+            alert('no data, try later')
+        }
+    }
 
     useEffect(()=>{
-        getMember()
+        getMembers()
     },[])
     
     return (
         <>
-            {members.map((v,i) => {
-                {/* console.log(data) */}
+            
+                {/* 目前是取members第1筆會員 */}
                 
-                return(
                 <div className="w-account-view">
                 <div className="w-div-title">
                     <p>帳戶概覽</p>
@@ -88,7 +93,7 @@ function AccountViewtest() {
                                 <input 
                                     type="email" readonly 
                                     className="form-control-plaintext" 
-                                    value={v.member_account} 
+                                    value={members[0].member_account} 
                                     />
                             </div>
                         </div>
@@ -98,7 +103,7 @@ function AccountViewtest() {
                                 <input 
                                     type="text" readonly 
                                     className="form-control-plaintext" 
-                                    value={v.member_name}
+                                    value={members[0].member_name}
                                     />
                             </div>
                         </div>
@@ -108,7 +113,7 @@ function AccountViewtest() {
                                 <input 
                                     type="text" readonly 
                                     className="form-control-plaintext" 
-                                    value={v.member_gender}
+                                    value={members[0].member_gender}
                                     />
                             </div>
                         </div>
@@ -118,7 +123,7 @@ function AccountViewtest() {
                                 <input 
                                     type="text" readonly 
                                     className="form-control-plaintext" 
-                                    value={v.member_phone}
+                                    value={members[0].member_phone}
                                     />
                             </div>
                         </div>
@@ -128,16 +133,15 @@ function AccountViewtest() {
                                 <input 
                                     type="text" readonly 
                                     className="form-control-plaintext" 
-                                    value={v.member_birthdate}
+                                    value={members[0].member_birthdate}
                                     />
                             </div>
                         </div>
                     </form>
+                    {/* bug~~~跳轉到編輯個人檔案的頁面有問題，需要重新整理才會跑出會員檔案 */}
                     <NavLink to="/memberedit" className="w-accounteditbutton">編輯個人檔案 Edit</NavLink>
                 </div>
             </div>
-                )
-            })}
         </>
     )
 }

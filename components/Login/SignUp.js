@@ -7,6 +7,7 @@ function SignUp(props) {
 
   const [member_Account, setMember_Account] = useState('')
   const [member_Password, setMember_Password] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [member_Gender, setMember_Gender] = useState('')
   const [member_Birthdate, setMember_Birthdate] = useState('')
 
@@ -14,10 +15,12 @@ function SignUp(props) {
   let {id} = useParams()
   let history = useHistory()
 
+  
   async function addMember() {
     const newMember = {
       member_Account,
       member_Password,
+      confirmPassword,
       member_Gender,
       member_Birthdate
     }
@@ -79,7 +82,7 @@ function SignUp(props) {
     return (
         <>
         <div className="w-container__form w-signup01">
-      <form action="" className="w-form" id="form1">
+      <form action="http://localhost:3001/members" className="w-form" id="form1" method="post">
         <h2 className="w-form__title">註冊 Sign Up</h2>
         <div className="form-group">
           <label htmlFor="">建立帳號 Account</label>
@@ -111,8 +114,8 @@ function SignUp(props) {
             type="password" 
             placeholder="再次輸入密碼" 
             className="form-control w-input" 
-            value={member_Password}
-            onChange={(e)=>setMember_Password(e.target.value)}
+            value={confirmPassword}
+            onChange={(e)=>setConfirmPassword(e.target.value)}
             required
             />
         </div>
@@ -121,7 +124,8 @@ function SignUp(props) {
           <select 
             className="form-control" 
             value={member_Gender}
-            onChange={(e)=>setMember_Gender(e.target.value)}>
+            onChange={(e)=>setMember_Gender(e.target.value)}
+            >
             <option>不透露</option>
             <option>男</option>
             <option>女</option>
@@ -150,9 +154,7 @@ function SignUp(props) {
         </div>
         <button
           className="w-btn-clicksend"
-          onClick={()=>{
-            addMember()
-          }}
+          onClick={()=>{addMember()}}
           >
           確認送出 Send
           </button>

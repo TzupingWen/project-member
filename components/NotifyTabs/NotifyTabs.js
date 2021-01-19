@@ -50,6 +50,36 @@ function NotifyTabs() {
             )
             if(response.ok){
                 const data = await response.json()
+                // console.log(data) 
+                const datas = data[0].notifications_account
+                const orders = data[0].notifications_orders
+                const classsess = data[0].notifications_lesson
+
+                // console.log(data)
+                setAccountNotify(datas)
+                setOrdersNotify(orders)
+                setLessonNotify(classsess)
+                // console.log(response.data[0].notifications_account)
+            } 
+        } catch(error) {
+            alert('no data')
+        }
+    }
+
+    async function getMember(id){
+        try {
+            const response = await fetch(
+                'http://localhost:3001/members/get/' + id,
+                {
+                    method:'get',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                }
+            )
+            if(response.ok){
+                const data = await response.json()
                 const datas = data[0].notifications_account
                 const orders = data[0].notifications_orders
                 const classsess = data[0].notifications_lesson

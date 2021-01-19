@@ -16,8 +16,8 @@ import PurchaseOrderContent from '../components/PurchaseOrderContent/PurchaseOrd
 import LessonContent from '../components/LessonContent/LessonContent'
 import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
 
-//測試data
-// import AccountViewtest from '../components/AccountView/AccountViewtest'
+//測試帳戶概覽
+import AccountViewtest from '../components/AccountView/AccountViewtest'
 
 function Member(props) {
     const {isAuth} = props
@@ -38,8 +38,12 @@ function Member(props) {
             <Switch>
                 <Route path="/member">
                     <LatestNews />
-                    <AccountView />
-                    {/* 測試的 <AccountViewtest /> */}
+                    {/* <AccountView /> */}
+
+                    {/* 這個是測試帳戶概覽 */}
+                    <AccountViewtest />
+                    {/* 這個是測試帳戶概覽 */}
+
                 </Route>
                 <Route path="/memberedit">
                     <ProfileEdit isAuth={isAuth} />
