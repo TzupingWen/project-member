@@ -1,25 +1,27 @@
 import React, {useState,useEffect} from 'react'
 import { NavLink } from 'react-router-dom'
 import './AccountView.scss'
-import {useParams,useHistory} from 'react-router-dom'
+// import {useParams,useHistory} from 'react-router-dom'
 
-//測試
-// import data from '../../data/users'
+// 此頁為測試資料
+// 
+function AccountView(props) {
+    const [members, setMembers] = useState('AccountViewtest')
+    // 是否連到members資料?
+    console.log('members?:',members); 
 
-function AccountView() {
-    // const [members, setMembers] = useState()
-    const initialMember = {
-        member_Account:"",
-        member_Name:"",
-        member_Gender:"",
-        member_Phone:"",
-        member_Birthdate:"",
-        member_Address:""
-    }
+    const [member, setMember] = useState('')
+
     
+    // const initialMember = {
+    //     member_Account:"",
+    //     member_Name:"",
+    //     member_Gender:"",
+    //     member_Phone:"",
+    //     member_Birthdate:"",
+    //     member_Address:""
+    // }
     
-    const [member, setMember] = useState(initialMember)
-
 
     // const [member_Account, setMember_Account] = useState('')
     // const [member_Name, setMember_Name] = useState('')
@@ -29,54 +31,56 @@ function AccountView() {
     // const [member_Address, setMember_Address] = useState('')
 
     // let {id} = useParams()
-    let history = useHistory()
 
-    // async function getMembers() {
-    //     try {
-    //         const response = await fetch(
-    //             'http://localhost:3001/members',
-    //             {
-    //                 method:'get',
-    //             }
-    //         )
-    //         if(response.ok) {
-    //             const data = await response.json()
-
-    //             setMembers(data)
-    //         }
-    //     } catch(error) {
-    //         alert('no data, try later')
-    //     }
-    // }
-
-    async function getMember() {
+    async function getMembers() {
         try {
             const response = await fetch(
-                `http://localhost:3001/members/get/`,
+                'http://localhost:3001/members',
                 {
                     method:'get',
                 }
             )
             if(response.ok) {
                 const data = await response.json()
-                
-                // setMember(data)
+                console.log('data:',data)
+
+                setMembers(data)
             }
         } catch(error) {
-            alert('no data, try later')
+            console.log(error)
         }
     }
 
+    // 無法取得特定id會員
+    // async function getMember(id) {
+    //     try {
+    //         const response = await fetch(
+    //             'http://localhost:3001/members/' + id,
+    //             {
+    //                 method:'get',
+    //             }
+    //         )
+    //         if(response.ok) {
+    //             const data2 = await response.json()
+    //             console.log('?:',data2) 
+                
+    //             setMember(data2)
+    //             // console.log('???:',data);
+    //         }
+    //     } catch(error) {
+    //         alert('no data, try later')
+    //     }
+    // }
+
     useEffect(()=>{
-        getMember()
+        getMembers()
     },[])
     
     return (
         <>
-            {member.map((v,i) => {
-                {/* console.log(data) */}
+            
+                {/* 目前是取members第1筆會員 */}
                 
-                return(
                 <div className="w-account-view">
                 <div className="w-div-title">
                     <p>帳戶概覽</p>
@@ -89,8 +93,7 @@ function AccountView() {
                                 <input 
                                     type="email" readonly 
                                     className="form-control-plaintext" 
-                                    value={v.member_account} 
-                                    // onChange={(e)=>(setMember_Account(e.target.value))}
+                                    value={members[0].member_account} 
                                     />
                             </div>
                         </div>
@@ -100,8 +103,7 @@ function AccountView() {
                                 <input 
                                     type="text" readonly 
                                     className="form-control-plaintext" 
-                                    value={v.member_name}
-                                    // onChange={(e)=>(setMember_Name(e.target.value))} 
+                                    value={members[0].member_name}
                                     />
                             </div>
                         </div>
@@ -111,8 +113,7 @@ function AccountView() {
                                 <input 
                                     type="text" readonly 
                                     className="form-control-plaintext" 
-                                    value={v.member_gender}
-                                    // onChange={(e)=>(setMember_Gender(e.target.value))} 
+                                    value={members[0].member_gender}
                                     />
                             </div>
                         </div>
@@ -122,8 +123,7 @@ function AccountView() {
                                 <input 
                                     type="text" readonly 
                                     className="form-control-plaintext" 
-                                    value={v.member_phone}
-                                    // onChange={(e)=>(setMember_Phone(e.target.value))} 
+                                    value={members[0].member_phone}
                                     />
                             </div>
                         </div>
@@ -133,17 +133,15 @@ function AccountView() {
                                 <input 
                                     type="text" readonly 
                                     className="form-control-plaintext" 
-                                    value={v.member_birthdate}
-                                    // onChange={(e)=>(setMember_Birthdate(e.target.value))} 
+                                    value={members[0].member_birthdate}
                                     />
                             </div>
                         </div>
                     </form>
+                    {/* bug~~~跳轉到編輯個人檔案的頁面有問題，需要重新整理才會跑出會員檔案 */}
                     <NavLink to="/memberedit" className="w-accounteditbutton">編輯個人檔案 Edit</NavLink>
                 </div>
             </div>
-                )
-            })}
         </>
     )
 }

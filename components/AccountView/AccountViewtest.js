@@ -5,7 +5,7 @@ import {useParams,useHistory} from 'react-router-dom'
 
 // 此頁為測試資料
 // 
-function AccountViewtest() {
+function AccountViewtest(props) {
     const [members, setMembers] = useState('AccountViewtest')
     // 是否連到members資料?
     console.log('members?:',members); 
@@ -23,12 +23,12 @@ function AccountViewtest() {
     // }
     
 
-    const [member_Account, setMember_Account] = useState('')
-    const [member_Name, setMember_Name] = useState('')
-    const [member_Gender, setMember_Gender] = useState('')
-    const [member_Phone, setMember_Phone] = useState('')
-    const [member_Birthdate, setMember_Birthdate] = useState('')
-    const [member_Address, setMember_Address] = useState('')
+    // const [member_Account, setMember_Account] = useState('')
+    // const [member_Name, setMember_Name] = useState('')
+    // const [member_Gender, setMember_Gender] = useState('')
+    // const [member_Phone, setMember_Phone] = useState('')
+    // const [member_Birthdate, setMember_Birthdate] = useState('')
+    // const [member_Address, setMember_Address] = useState('')
 
     // let {id} = useParams()
 
@@ -51,26 +51,26 @@ function AccountViewtest() {
         }
     }
 
-    // 無法取得特定id的會員
-    async function getMember(id) {
-        try {
-            const response = await fetch(
-                'http://localhost:3001/members/get/${id}',
-                {
-                    method:'get',
-                }
-            )
-            if(response.ok) {
-                const data2 = await response.json()
-                console.log('?:',data2) 
+    // 無法取得特定id會員
+    // async function getMember(id) {
+    //     try {
+    //         const response = await fetch(
+    //             'http://localhost:3001/members/' + id,
+    //             {
+    //                 method:'get',
+    //             }
+    //         )
+    //         if(response.ok) {
+    //             const data2 = await response.json()
+    //             console.log('?:',data2) 
                 
-                setMember(data2)
-                // console.log('???:',data);
-            }
-        } catch(error) {
-            alert('no data, try later')
-        }
-    }
+    //             setMember(data2)
+    //             // console.log('???:',data);
+    //         }
+    //     } catch(error) {
+    //         alert('no data, try later')
+    //     }
+    // }
 
     useEffect(()=>{
         getMembers()

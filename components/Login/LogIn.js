@@ -19,10 +19,7 @@ function LogIn(props) {
           <label for="">密碼 Password</label>
           <input type="password" placeholder="請輸入密碼" className="form-control w-input" />
         </div>
-        <button 
-          className="w-btn-clicksend">
-          登入 Sign In
-          </button>
+        <button className="w-btn-clicksend">登入 Sign In</button>
         <Link to="/forgotpassword">忘記密碼？</Link>
         <div className="d-flex w-signbtns">
           <button className="w-btn-facebook">facebook 登入</button>

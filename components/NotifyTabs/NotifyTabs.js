@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react'
 import './NotifyTabs.scss'
 import {Tabs, Tab} from 'react-bootstrap'
-import ClicktoRemoveButton from '../ClicktoRemoveButton/ClicktoRemoveButton'
+
 
 function NotifyTabs() {
     // Tab對應的eventKey
@@ -11,28 +11,64 @@ function NotifyTabs() {
     const [accountNotify, setAccountNotify] = useState([])
     const [ordersNotify, setOrdersNotify] = useState([])
     const [lessonNotify, setLessonNotify] = useState([])
+    // const [childData , setChildData] = useState()
 
-    
 
-    async function deleteMembers(id){
+    // x 未取得members內的訊息
+    // async function deleteMembers(){
+    //     try {
+    //         const response = await fetch(
+    //             'http://localhost:3001/members/delete/1',
+    //             {
+    //                 // method:'delete',
+    //                 method:'put'
+    //             }
+    //         )
+    //         if(response.ok){
+    //             const data = await response.json()
+    //             // data是所有會員資料
+    //             const datas1 = data[0].notifications_account
+    //             console.log(datas1)
+    //             const orders = data[0].notifications_orders
+    //             console.log(orders)
+    //             const classsess = data[0].notifications_lesson
+    //             console.log(classsess)
+                
+    //             setAccountNotify(null)
+    //             setOrdersNotify(null)
+    //             setLessonNotify(null)
+
+    //             // getMembers()
+
+    //         } 
+    //     } catch(error) {
+    //         console.log('error',error)
+    //     }
+    // }
+
+    async function deleteNotifications(index){
+        // 目前member_id取固定值
+        const member_id = 1
         try {
             const response = await fetch(
-                'http://localhost:3001/members/delete/' + id,
+                'http://localhost:3001/members/deleteNotifications/' + index + '/' + member_id,
                 {
-                    method:'delete',
+                    method:'delete'
                 }
             )
             if(response.ok){
+                // reload data
                 const data = await response.json()
-                const datas1 = data[0].notifications_account
-                
-                setAccountNotify(datas1)
-                getMembers()
-                
+                const datas = data[0].notifications_account
+                const orders = data[0].notifications_orders
+                const classsess = data[0].notifications_lesson
+
+                setAccountNotify(datas)
+                setOrdersNotify(orders)
+                setLessonNotify(classsess)
             } 
         } catch(error) {
-            alert('no data')
-            console.log(error)
+            console.log('error',error)
         }
     }
 
@@ -50,50 +86,52 @@ function NotifyTabs() {
             )
             if(response.ok){
                 const data = await response.json()
-                // console.log(data) 
+                console.log('data',data) 
                 const datas = data[0].notifications_account
+                console.log('datas',datas)
                 const orders = data[0].notifications_orders
+                console.log('orders',orders)
                 const classsess = data[0].notifications_lesson
-
-                // console.log(data)
+                console.log('classsess',classsess)
+                console.log(data)
                 setAccountNotify(datas)
                 setOrdersNotify(orders)
                 setLessonNotify(classsess)
-                // console.log(response.data[0].notifications_account)
+               
             } 
         } catch(error) {
-            alert('no data')
+            console.log('error',error)
         }
     }
 
-    async function getMember(id){
-        try {
-            const response = await fetch(
-                'http://localhost:3001/members/get/' + id,
-                {
-                    method:'get',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                }
-            )
-            if(response.ok){
-                const data = await response.json()
-                const datas = data[0].notifications_account
-                const orders = data[0].notifications_orders
-                const classsess = data[0].notifications_lesson
+    // async function getMember(id){
+    //     try {
+    //         const response = await fetch(
+    //             'http://localhost:3001/members/get/' + id,
+    //             {
+    //                 method:'get',
+    //                 headers: {
+    //                     Accept: 'application/json',
+    //                     'Content-Type': 'application/json',
+    //                 },
+    //             }
+    //         )
+    //         if(response.ok){
+    //             const data = await response.json()
+    //             const datas = data[0].notifications_account
+    //             const orders = data[0].notifications_orders
+    //             const classsess = data[0].notifications_lesson
 
-                // console.log(data)
-                setAccountNotify(datas)
-                setOrdersNotify(orders)
-                setLessonNotify(classsess)
-                // console.log(response.data[0].notifications_account)
-            } 
-        } catch(error) {
-            alert('no data')
-        }
-    }
+    //             // console.log(data)
+    //             setAccountNotify(datas)
+    //             setOrdersNotify(orders)
+    //             setLessonNotify(classsess)
+    //             // console.log(response.data[0].notifications_account)
+    //         } 
+    //     } catch(error) {
+    //         console.log('error',error)
+    //     }
+    // }
 
     useEffect(()=>{
         getMembers()
@@ -119,6 +157,7 @@ function NotifyTabs() {
                 <div className="w-notifydiv" key={i}>
                         <table className="table table-borderless w-notify-table">
                                 <tbody>
+                                
                                     <tr id="w-notifytbodytr1">
                                         <td style={{width: 150, textAlign: 'center'}}>
                                         {v.accountnotify_title}
@@ -127,9 +166,23 @@ function NotifyTabs() {
                                         {v.accountnotify_content}
                                         </td>
                                         <td>
-                                        <ClicktoRemoveButton />
+                                        {/* <ClicktoRemoveButton
+                                            onClick={()=>{
+                                                deleteNotifications({i})
+                                            }}
+                                        /> */}
+
+                                        <button 
+                                            type="button" 
+                                            className="close w-remove" 
+                                            id="w-rrrmove" 
+                                            aria-label="Close" 
+                                            onClick={()=>{deleteNotifications({i})}}>
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                         </td>
                                     </tr>
+                                
                                 </tbody>
                             </table>
                         </div>
@@ -150,11 +203,19 @@ function NotifyTabs() {
                                         {v.orderlistnotify_content}
                                         </td>
                                         <td>
-                                        <ClicktoRemoveButton 
+                                        {/* <ClicktoRemoveButton 
                                             onClick={()=>{
-                                                deleteMembers()
+                                                deleteNotifications({i})
                                             }}
-                                        />
+                                        /> */}
+                                        <button 
+                                            type="button" 
+                                            className="close w-remove" 
+                                            id="w-rrrmove" 
+                                            aria-label="Close" 
+                                            onClick={()=>{deleteNotifications({i})}}>
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -177,11 +238,22 @@ function NotifyTabs() {
                                         {v.lessonnotify_content}
                                         </td>
                                         <td>
-                                        <ClicktoRemoveButton 
+                                        {/* <ClicktoRemoveButton 
                                             onClick={()=>{
-                                                deleteMembers()
+                                                deleteNotifications({i})
                                             }}
-                                        />
+                                        /> */}
+                                        <button 
+                                            type="button" 
+                                            className="close w-remove" 
+                                            id="w-rrrmove" 
+                                            aria-label="Close" 
+                                            onClick={()=>{deleteNotifications({i})}}>
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        {/* <SweetAlert success title="Good job!" onConfirm={this.onConfirm} onCancel={this.onCancel}>
+                                        刪除成功！
+                                        </SweetAlert> */}
                                         </td>
                                     </tr>
                                     

@@ -3,6 +3,7 @@ import './LessonDetailContent.scss'
 
 // 測試data
 // import data from '../../data/lessondata'
+
     function LessonDetailContent() {
     const [lessonDetail, setLessonDetail] = useState([])
 
@@ -20,7 +21,7 @@ import './LessonDetailContent.scss'
             )
             if(response.ok){
                 const data = await response.json()
-                const datas = data[0].lesson_booking
+                const datas = data[0].course_booking
 
                 console.log(data)
                 setLessonDetail(datas)

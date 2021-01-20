@@ -1,13 +1,41 @@
 import React, {useState,useEffect} from 'react'
 import './MyCollectionTable.scss'
 import ClicktoCartButton from '../ClicktoCartButton/ClicktoCartButton'
-import ClicktoRemoveButton from '../ClicktoRemoveButton/ClicktoRemoveButton'
+// import ClicktoRemoveButton from '../ClicktoRemoveButton/ClicktoRemoveButton'
+
 
 // 測試data
 // import data from '../../data/collectionsdata'
 
 function MyCollectionTable() {
     const [collections, setCollections] = useState([])
+    // console.log('collections:',collections)
+
+    // const _id = 1
+
+    async function deleteCollections(index){
+        const member_id = 1
+        try {
+            const response = await fetch(
+                'http://localhost:3001/members/deleteCollections/' + index + '/' + member_id,
+                {
+                    method:'delete'
+                }
+            )
+            if(response.ok){
+                // reload data
+                const data = await response.json()
+                const datas = data[0].collections
+
+                setCollections(datas)
+               
+            } 
+        } catch(error) {
+            console.log('error',error)
+        }
+    }
+
+
 
     async function getMembers(){
         try {
@@ -23,19 +51,49 @@ function MyCollectionTable() {
             )
             if(response.ok){
                 const data = await response.json()
+                // data是所有會員資料
+                console.log('data?:',data)
+                // 測試
                 const datas = data[0].collections
+                // datas是第1個會員的所有收藏資料
+                console.log('datas?:',datas)
 
-                console.log(data)
                 setCollections(datas)
-                
             } 
         } catch {
             alert('no data')
         }
     }
 
+    // async function getMember(id){
+    //     try {
+    //         const response = await fetch(
+    //             'http://localhost:3001/members/' + id,
+    //             {
+    //                 method:'get',
+    //                 headers: {
+    //                     Accept: 'application/json',
+    //                     'Content-Type': 'application/json',
+    //                 },
+    //             }
+    //         )
+    //         if(response.ok){
+    //             const data = await response.json()
+    //             const datas = data[0].collections
+                
+    //             console.log(data)
+    //             setCollections(datas)
+                
+                
+    //         } 
+    //     } catch(error) {
+    //         console.log('error',error)
+    //     }
+    // }
+
     useEffect(()=>{
         getMembers()
+        // getMember(_id)
     },[])
 
 
@@ -72,7 +130,19 @@ function MyCollectionTable() {
                 <ClicktoCartButton />
             </td>
             <td className="align-middle d-flex" style={{textAlign: 'center'}}>
-                <ClicktoRemoveButton />
+                {/* <ClicktoRemoveButton 
+                    onClick={()=>{
+                        deleteCollections({i})
+                    }}
+                /> */}
+                <button 
+                    type="button" 
+                    className="close w-remove" 
+                    id="w-rrrmove" 
+                    aria-label="Close"                         
+                    onClick={()=>{deleteCollections({i})}}>                        
+                    <span aria-hidden="true">&times;</span>                       
+                </button>                        
             </td>
         </tr>
             )

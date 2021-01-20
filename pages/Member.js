@@ -16,11 +16,12 @@ import PurchaseOrderContent from '../components/PurchaseOrderContent/PurchaseOrd
 import LessonContent from '../components/LessonContent/LessonContent'
 import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
 
-//測試帳戶概覽
-import AccountViewtest from '../components/AccountView/AccountViewtest'
+//測試帳戶資訊
+// import AccountViewtest from '../components/AccountView/AccountViewtest'
 
 function Member(props) {
-    const {isAuth} = props
+    // test
+    const {isAuth, setIsAuth} = props
 
     return (
         <Router>
@@ -38,11 +39,11 @@ function Member(props) {
             <Switch>
                 <Route path="/member">
                     <LatestNews />
-                    {/* <AccountView /> */}
+                    <AccountView />
 
-                    {/* 這個是測試帳戶概覽 */}
-                    <AccountViewtest />
-                    {/* 這個是測試帳戶概覽 */}
+                    {/* --這個是測試帳戶概覽-- */}
+                    {/* <AccountViewtest /> */}
+                    {/* --這個是測試帳戶概覽-- */}
 
                 </Route>
                 <Route path="/memberedit">
@@ -66,6 +67,15 @@ function Member(props) {
             </Switch>  
             </div>
         </section>
+
+        {/* --test-- */}
+        {/* <button
+            onClick={()=>{
+                setIsAuth(true)
+            }}>登入</button>
+        {isAuth ? '會員登入，你好' : '未登入'} */}
+        {/* --test-- */}
+        
         </>
         </Router>
     )

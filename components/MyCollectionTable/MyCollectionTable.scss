@@ -8,6 +8,7 @@
 .w-mycollect-tablebody tr td {
   min-height: 180px;
   justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
@@ -32,4 +33,13 @@
   font-size: 14px;
   color: #838383;
   margin-bottom: 3px;
+}
+
+// remove button
+.w-remove {
+  color: #838383;
+
+  :hover {
+    color: #e58f80;
+  }
 }

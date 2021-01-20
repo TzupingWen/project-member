@@ -6,11 +6,16 @@ import MemberContent from '../components/MemberContent/MemberContent'
 import PurchaseOrderContent from '../components/PurchaseOrderContent/PurchaseOrderContent'
 import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
 
-function PurchaseOrder() {
+function PurchaseOrder(props) {
+    const {isAuth} = props
+
     return (
         <>
         <MemberHeader />
         <MyBreadcrumb />
+        {/* test */}
+        {/* {isAuth ? '會員登入，xxx你好' : '未登入'} */}
+        
             <section className="w-wrapper d-flex">
             <div className="w-card">
                 <MemberAvatar />

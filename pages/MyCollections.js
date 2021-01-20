@@ -6,11 +6,16 @@ import MyCollectionContent from '../components/MyCollectionContent/MyCollectionC
 import './Member.scss'
 import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
 
-function MyCollections() {
+function MyCollections(props) {
+    const {isAuth} = props
+
     return (
         <>
         <MemberHeader />
         <MyBreadcrumb />
+        {/* test */}
+        {/* {isAuth ? '會員登入，xxx你好' : '未登入'} */}
+        
         <section className="w-wrapper d-flex">
             <div className="w-card">
                 <MemberAvatar />

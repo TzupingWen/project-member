@@ -1,12 +1,17 @@
 import React, {useState, useEffect} from 'react'
 import './ProfileEdit.scss'
-import {useParams,useHistory,withRouter} from 'react-router-dom'
+import {withRouter,useHistory} from 'react-router-dom'
 // 測試data
 // import data from '../../data/users'
 
-function ProfileEdit(props) {
-    const [members, setMembers] = useState([])
-    const [member, setMember] = useState([])
+function ProfileEdit() {
+    // 目前只取id=1的會員
+    const _id = 1;
+
+    const [members, setMembers] = useState('ProfileEdit')
+    // console.log('members:',members)
+    const [member, setMember] = useState('')
+    // console.log('member:',member)
 
     const [member_Account, setMember_Account] = useState('')
     const [member_Name, setMember_Name] = useState('')
@@ -15,26 +20,27 @@ function ProfileEdit(props) {
     const [member_Birthdate, setMember_Birthdate] = useState('')
     const [member_Address, setMember_Address] = useState('')
 
-    let {id} = useParams()
+    // let {id} = useParams()
     let history = useHistory()
 
     async function updateMember(id) {
         const newMember = {
-            member_Account,
-            member_Name,
-            member_Gender,
-            member_Phone,
-            member_Birthdate,
-            member_Address,
+            member_account: member_Account,
+            member_name: member_Name,
+            member_gender: member_Gender,
+            member_phone: member_Phone,
+            member_birthdate: member_Birthdate,
+            member_address: member_Address,
         }
         try {
+            console.log(newMember)
             const response = await fetch(
-                'http://localhost:3001/members/' + id,
+                'http://localhost:3001/members/update/' + id,
                 {
-                    method:'patch',
+                    method:'put',
                     body:JSON.stringify(newMember),
                     headers: {
-                        Accept: 'application/json',
+                        // Accept: 'application/json',
                         'Content-Type': 'application/json',
                     },
                 }
@@ -44,18 +50,17 @@ function ProfileEdit(props) {
                 console.log(data)
                 
                 if(data.id) alert('ok')
-                history.push('/members')
+                history.push('/member')
             }
         } catch(error) {
-            alert('no data, try later')
-            console.log(error)
+            console.log('error:',error)
         }
     }
 
     // async function getMembers() {
     //     try {
     //         const response = await fetch(
-    //             'http://localhost:3001/members'+ id,
+    //             'http://localhost:3001/members',
     //             {
     //                 method:'get',
     //                 headers: {
@@ -66,6 +71,7 @@ function ProfileEdit(props) {
     //         )
     //         if(response.ok) {
     //             const data = await response.json()
+    //             console.log('?',data)
 
     //             setMembers(data)
     //         }
@@ -88,28 +94,26 @@ function ProfileEdit(props) {
             )
             if(response.ok) {
                 const data = await response.json()
-                
-                setMember_Account(data.member_Account)
-                setMember_Name(data.member_Name)
-                setMember_Gender(data.member_Gender)
-                setMember_Phone(data.member_Phone)
-                setMember_Birthdate(data.member_Birthdate)
-                setMember_Address(data.member_Address)
+                setMember_Account(data.member_account)
+                setMember_Name(data.member_name)
+                setMember_Gender(data.member_gender)
+                setMember_Phone(data.member_phone)
+                setMember_Birthdate(data.member_birthdate)
+                setMember_Address(data.member_address)
             }
         } catch(error) {
-            alert('no data, try later')
+            console.log('error:',error)
         }
     }
 
     useEffect(()=>{
-        getMember(id)
+        // getMembers()
+        getMember(_id)
     },[])
 
     return (
         <>
-        {members.map((v,i)=>{
-            return(
-                <div key={i}>
+                <div>
                 <div className="w-editfile">
                 <div className="w-div-title">
                     <p>編輯個人檔案</p>
@@ -122,7 +126,7 @@ function ProfileEdit(props) {
                                 type="email" 
                                 className="form-control" 
                                 id="exampleFormControlInput1"
-                                Value={v.member_account}
+                                Value={member_Account}
                                 onChange={(e)=>(setMember_Account(e.target.value))}
                                  />
                         </div>
@@ -132,23 +136,30 @@ function ProfileEdit(props) {
                                 type="text" 
                                 className="form-control" 
                                 id="exampleFormControlInput2"
-                                Value={v.member_name}
+                                Value={member_Name}
                                 onChange={(e)=>(setMember_Name(e.target.value))} 
 
                                 />
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleFormControlSelect1">性別 Gender</label>
-                            <select 
+                            <input 
                                 className="form-control" 
                                 id="exampleFormControlSelect1"
-                                Value={v.member_gender}
+                                Value={member_Gender}
+                                readOnly="readonly"
+                            />
+                            {/* <select 
+                                className="form-control" 
+                                id="exampleFormControlSelect1"
+                                Value={members[0].member_gender}
+                                checked
                                 onChange={(e)=>(setMember_Gender(e.target.value))}
                                 >
                                 <option value="不透露">不透露</option>
                                 <option value="男">男</option>
                                 <option value="女">女</option>
-                            </select>
+                            </select> */}
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleFormControlInput3">手機 Phone</label>
@@ -156,21 +167,27 @@ function ProfileEdit(props) {
                                 type="text" 
                                 className="form-control" 
                                 id="exampleFormControlInput3"
-                                Value={v.member_phone}
+                                Value={member_Phone}
                                 onChange={(e)=>(setMember_Phone(e.target.value))} 
 
                                 />
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleFormControlInput4">出生日期 Birth Date</label>
-                            <div className="d-flex">
+                            <input 
+                                className="form-control" 
+                                id="exampleFormControlSelect1"
+                                Value={member_Birthdate}
+                                readOnly="readonly"
+                            />
+                            {/* <div className="d-flex">
                                 <input
                                     type="date"
                                     id="exampleFormControlInput4"
-                                    Value={v.member_birthdate}
+                                    Value={members[0].member_birthdate}
                                     onChange={(e)=>(setMember_Birthdate(e.target.value))}
                                     />
-                            </div>
+                            </div> */}
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleFormControlInput5">地址 Address</label>
@@ -178,7 +195,7 @@ function ProfileEdit(props) {
                                 type="text" 
                                 className="form-control"
                                 id="exampleFormControlInput5"
-                                Value={v.member_address}
+                                Value={member_Address}
                                 onChange={(e)=>(setMember_Address(e.target.value))} 
                                 />
                         </div>
@@ -187,13 +204,12 @@ function ProfileEdit(props) {
                         type="button" 
                         className="btn w-editsavebutton"
                         onClick={()=>{
-                            updateMember()}} >儲存修改 Save</button>
+                            updateMember(1)}} 
+                        >儲存修改 Save</button>
                 </div>
             </div>
             </div>
-            )
-        })}
-        
+
         </>
     )
 }

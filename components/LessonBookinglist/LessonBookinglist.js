@@ -2,30 +2,30 @@ import React, {useState,useEffect} from 'react'
 // import LessonBookinglistTbodyTr from '../LessonBookinglistTbodyTr/LessonBookinglistTbodyTr'
 import './LessonBookinglist.scss'
 import ClicktoLessonButton from '../ClicktoLessonButton/ClicktoLessonButton'
-import ClickCancelButton from '../ClickCancelButton/ClickCancelButton'
-import Pagination from '../Pagination/Pagination'
 
 function LessonBookinglist(props) {
     const [lessonbookings, setLessonbookings] = useState([])
 
-    async function deleteMember(id) {
+    async function deleteCourse(index) {
+        const member_id = 1
         try {
             const response = await fetch (
-                'http://localhost:3001/members/' + id,
+                'http://localhost:3001/members/deleteCourse/' + index + '/' + member_id,
                 {
                     method:'delete',
                 }
             )
             if(response.ok){
+                // 重新載入頁面
                 const data = await response.json()
-                // const datas = data[0].lesson_booking
+                const datas = data[0].course_booking
 
                 // console.log(data)
-                // setLessonbookings(datas)
-                getMembers()
+                setLessonbookings(datas)
+                
             } 
         } catch(error) {
-            alert('no data')
+            console.log('error:',error)
         }
     }
 
@@ -43,14 +43,17 @@ function LessonBookinglist(props) {
             )
             if(response.ok){
                 const data = await response.json()
-                const datas = data[0].lesson_booking
+                const datas = data[0].course_booking
 
-                console.log(data)
+                console.log('data?',data)
+                console.log('datas?',datas)
+                
                 setLessonbookings(datas)
+                
                 
             } 
         } catch(error) {
-            alert('no data')
+            console.log('error:',error)
         }
     }
 
@@ -98,18 +101,23 @@ function LessonBookinglist(props) {
                         {/* 課程詳情&取消預約按鈕 */}
                         <td className="align-middle">
                         <ClicktoLessonButton />
-                        <ClickCancelButton 
+                        {/* <ClickCancelButton 
                             onClick={() => {
                                 deleteMember()
                             }}
-                        />
+                        /> */}
+                        <button 
+                            type="button" 
+                            className="w-btn-cancellesson"
+                            onClick={()=>{deleteCourse({i})}}
+                            >取消預約</button> 
                         </td>
                         </tr>
                             )
                         })}
                                     </tbody>
                                 </table>
-                                <Pagination />
+                                
         </>
     )
 }

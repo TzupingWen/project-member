@@ -7,10 +7,15 @@ import MemberHeader from '../components/MemberHeader/MemberHeader'
 import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
 
 function Notifications(props) {
+    const {isAuth} = props
+
     return (
         <>
             <MemberHeader />
             <MyBreadcrumb />
+            {/* test */}
+            {/* {isAuth ? '會員登入，xxx你好' : '未登入'} */}
+            
             <section className="w-wrapper d-flex">
             <div className="w-card">
                 <MemberAvatar />
