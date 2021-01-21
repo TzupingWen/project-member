@@ -93,7 +93,8 @@ function AccountView(props) {
                                 <input 
                                     type="email" readonly 
                                     className="form-control-plaintext" 
-                                    value={members[0].member_account} 
+                                    value={members[0].member_account}
+                                    disabled 
                                     />
                             </div>
                         </div>
@@ -104,6 +105,7 @@ function AccountView(props) {
                                     type="text" readonly 
                                     className="form-control-plaintext" 
                                     value={members[0].member_name}
+                                    disabled
                                     />
                             </div>
                         </div>
@@ -114,6 +116,7 @@ function AccountView(props) {
                                     type="text" readonly 
                                     className="form-control-plaintext" 
                                     value={members[0].member_gender}
+                                    disabled
                                     />
                             </div>
                         </div>
@@ -124,6 +127,7 @@ function AccountView(props) {
                                     type="text" readonly 
                                     className="form-control-plaintext" 
                                     value={members[0].member_phone}
+                                    disabled
                                     />
                             </div>
                         </div>
@@ -134,6 +138,7 @@ function AccountView(props) {
                                     type="text" readonly 
                                     className="form-control-plaintext" 
                                     value={members[0].member_birthdate}
+                                    disabled
                                     />
                             </div>
                         </div>

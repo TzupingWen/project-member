@@ -2,9 +2,16 @@ import React, {useState,useEffect} from 'react'
 // import LessonBookinglistTbodyTr from '../LessonBookinglistTbodyTr/LessonBookinglistTbodyTr'
 import './LessonBookinglist.scss'
 import ClicktoLessonButton from '../ClicktoLessonButton/ClicktoLessonButton'
+import {Modal, Button} from 'react-bootstrap'
 
 function LessonBookinglist(props) {
     const [lessonbookings, setLessonbookings] = useState([])
+
+    //
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
 
     async function deleteCourse(index) {
         const member_id = 1
@@ -104,8 +111,29 @@ function LessonBookinglist(props) {
                         <button 
                             type="button" 
                             className="w-btn-cancellesson"
-                            onClick={()=>{deleteCourse({i})}}
-                            >取消預約</button> 
+                            data-toggle="modal" data-target="#exampleModal"
+                            onClick={handleShow}>
+                            取消預約</button> 
+                                        <Modal show={show} onHide={handleClose}>
+                                        <Modal.Header closeButton>
+                                        <Modal.Title>是否取消預約？</Modal.Title>
+                                        </Modal.Header>
+                                            <Modal.Body>
+                                            <button 
+                                            type="button" 
+                                            className="close w-remove" 
+                                            aria-label="Close" 
+                                            onClick={()=>{deleteCourse({i})}}>
+                                            <span aria-hidden="true">是，我要取消！</span>
+                                            </button>
+                                            </Modal.Body>
+                                            <Modal.Footer>
+                                            <Button variant="secondary" onClick={handleClose}>
+                                                否，回到課程管理
+                                            </Button>
+                                            </Modal.Footer>
+                                        </Modal>
+                        
                         </td>
                         </tr>
                             )

@@ -15,16 +15,16 @@
 .w-notifytabtitle {
   font-size: 24px;
   color: #d1cfcf;
+}
 
-  .active {
-    font-size: 24px;
-    color: #6c8650;
-  }
+.w-notifytabtitle.active {
+  font-size: 24px;
+  color: #6c8650 !important;
+}
 
-  :hover:not(.active) {
-    font-size: 24px;
-    color: #a8ae91;
-  }
+.w-notifytabtitle:hover {
+  font-size: 24px;
+  color: #a8ae91;
 }
 
 // 訊息通知內容

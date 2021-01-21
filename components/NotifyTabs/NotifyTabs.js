@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from 'react'
 import './NotifyTabs.scss'
-import {Tabs, Tab} from 'react-bootstrap'
+import {Tabs, Tab, Modal, Button} from 'react-bootstrap'
+import {useHistory} from 'react-router-dom'
 
 
 function NotifyTabs() {
@@ -11,6 +12,13 @@ function NotifyTabs() {
     const [accountNotify, setAccountNotify] = useState([])
     const [ordersNotify, setOrdersNotify] = useState([])
     const [lessonNotify, setLessonNotify] = useState([])
+
+    let history = useHistory()
+
+    //
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     
 
     // x 未取得members內的訊息
@@ -60,6 +68,8 @@ function NotifyTabs() {
                 const datas = data[0].notifications_account
                 const orders = data[0].notifications_orders
                 const classsess = data[0].notifications_lesson
+ 
+                history.push('/notifications')
 
                 setAccountNotify(datas)
                 setOrdersNotify(orders)
@@ -169,9 +179,29 @@ function NotifyTabs() {
                                             className="close w-remove" 
                                             id="w-rrrmove" 
                                             aria-label="Close" 
-                                            onClick={()=>{deleteNotifications({i})}}>
+                                            onClick={handleShow}>
                                             <span aria-hidden="true">&times;</span>
                                         </button>
+                                        <Modal show={show} onHide={handleClose}>
+                                        <Modal.Header closeButton>
+                                        <Modal.Title>是否刪除訊息？</Modal.Title>
+                                        </Modal.Header>
+                                            <Modal.Body>
+                                            <button 
+                                            type="button" 
+                                            className="close w-remove" 
+                                            // id="w-rrrmove" 
+                                            aria-label="Close" 
+                                            onClick={()=>{deleteNotifications({i})}}>
+                                            <span aria-hidden="true">是，刪除它！</span>
+                                            </button>
+                                            </Modal.Body>
+                                            <Modal.Footer>
+                                            <Button variant="secondary" onClick={handleClose}>
+                                                否，回到訊息通知
+                                            </Button>
+                                            </Modal.Footer>
+                                        </Modal>
                                         </td>
                                     </tr>
                                 </tbody>
