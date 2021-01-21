@@ -85,27 +85,22 @@ function LessonBookinglist(props) {
                         {/* 課程縮圖 */}
                         <td className="align-middle">      
                         <div>
-                        <img className="w-lessonpics" src={v.lesson_pics} alt="" />                           
+                        <img className="w-lessonpics" src={v.img} alt="" />                           
                         </div>                        
                         {/* 課程名稱 */}
                         </td>
-                        <td className="w-lessonname align-middle">{v.lesson_name}</td>                    
+                        <td className="w-lessonname align-middle">{v.name}</td>                    
                         {/* 課程時間 */}
                         <td className="w-lessontime align-middle">                   
-                        {v.lesson_date}<br/>{v.lesson_time}
+                        {v.date}<br/>{v.hours}
                         </td>            
                         {/* 課程費用 */}
-                        <td className="align-middle" style={{color: '#838383'}}>{v.lesson_price}</td>                    
+                        <td className="align-middle" style={{color: '#838383'}}>NT$ {v.price}</td>                    
                         {/* 課程狀態 */}
                         <td className="w-lessonstatus-booked align-middle">{v.lesson_status}</td>
                         {/* 課程詳情&取消預約按鈕 */}
                         <td className="align-middle">
                         <ClicktoLessonButton />
-                        {/* <ClickCancelButton 
-                            onClick={() => {
-                                deleteMember()
-                            }}
-                        /> */}
                         <button 
                             type="button" 
                             className="w-btn-cancellesson"

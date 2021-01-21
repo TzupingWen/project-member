@@ -10,7 +10,7 @@ function AccountView(props) {
     // 是否連到members資料?
     console.log('members?:',members); 
 
-    const [member, setMember] = useState('')
+    // const [member, setMember] = useState('')
 
     
     // const initialMember = {

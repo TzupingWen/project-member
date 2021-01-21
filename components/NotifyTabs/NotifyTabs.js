@@ -11,8 +11,7 @@ function NotifyTabs() {
     const [accountNotify, setAccountNotify] = useState([])
     const [ordersNotify, setOrdersNotify] = useState([])
     const [lessonNotify, setLessonNotify] = useState([])
-    // const [childData , setChildData] = useState()
-
+    
 
     // x 未取得members內的訊息
     // async function deleteMembers(){
@@ -47,7 +46,6 @@ function NotifyTabs() {
     // }
 
     async function deleteNotifications(index){
-        // 目前member_id取固定值
         const member_id = 1
         try {
             const response = await fetch(
@@ -166,12 +164,6 @@ function NotifyTabs() {
                                         {v.accountnotify_content}
                                         </td>
                                         <td>
-                                        {/* <ClicktoRemoveButton
-                                            onClick={()=>{
-                                                deleteNotifications({i})
-                                            }}
-                                        /> */}
-
                                         <button 
                                             type="button" 
                                             className="close w-remove" 
@@ -182,7 +174,6 @@ function NotifyTabs() {
                                         </button>
                                         </td>
                                     </tr>
-                                
                                 </tbody>
                             </table>
                         </div>

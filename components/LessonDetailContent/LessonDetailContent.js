@@ -52,15 +52,15 @@ import './LessonDetailContent.scss'
                                 <div>
                                 <tr>
                                     <th scope="row">課程名稱：</th>
-                                    <td>{classes.lesson_name}</td>
+                                    <td>{classes.name}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">課程時間：</th>
-                                    <td>{classes.lesson_date} {classes.lesson_time}</td>
+                                    <td>{classes.date} {classes.lesson_time}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">課程費用：</th>
-                                    <td>{classes.lesson_price}</td>
+                                    <td>NT$ {classes.price}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">預約狀態：</th>
@@ -79,7 +79,7 @@ import './LessonDetailContent.scss'
                     </table>
                 </div>
                 <div>
-                    <img className="w-lessondetailpics" src={classes.lesson_pics} alt="" />
+                    <img className="w-lessondetailpics" src={classes.img} alt="" />
                 </div>
             </div>
             )

@@ -1,7 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import './MyCollectionTable.scss'
 import ClicktoCartButton from '../ClicktoCartButton/ClicktoCartButton'
-// import ClicktoRemoveButton from '../ClicktoRemoveButton/ClicktoRemoveButton'
 
 
 // 測試data
@@ -114,27 +113,21 @@ function MyCollectionTable() {
             return(
                 <tr key={i}>
             <td className="align-middle">
-                <img className="w-collect-pics" src={v.collect_image} alt="" />                    
+                <img className="w-collect-pics" src={v.product_img} alt="" />                    
             </td>                                        
             <td className="align-middle">
                 <div className="w-collect-prod d-inline-block">
-                    <span>{v.collectName}</span>
-                    <p>{v.collectSize}</p>
-                    <p>{v.collectText}</p>                   
+                    <span>{v.product_name}</span>
+                    <p>{v.product_info}</p>                 
                 </div>                    
             </td>                    
             <td className="align-middle" style={{color: '#E58F80'}}>
-                <p>{v.prodPrice} / 月</p>
+                <p>NT$ {v.product_price}</p>
             </td>
-            <td className="align-middle">
+            <td className="align-middle d-flex justify-content-center">
                 <ClicktoCartButton />
             </td>
-            <td className="align-middle d-flex" style={{textAlign: 'center'}}>
-                {/* <ClicktoRemoveButton 
-                    onClick={()=>{
-                        deleteCollections({i})
-                    }}
-                /> */}
+            <td className="align-middle" style={{textAlign: 'center',maxWidth:100}}>
                 <button 
                     type="button" 
                     className="close w-remove" 

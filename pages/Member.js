@@ -23,6 +23,10 @@ function Member(props) {
     // test
     const {isAuth, setIsAuth} = props
 
+    const [memberData, setMemberData] = useState('Member')
+    const [avatarData, setAvatarData] = useState('')
+    const [viewToAvatarData, setViewToAvatarData] = useState('')
+
     return (
         <Router>
         <>

@@ -7,41 +7,41 @@ function LatestNews(props) {
     // const [orNotifyData, setOrNotifyData] = useState([])
     // const [leNotifyData, setLeNotifyData] = useState([])
 
-    async function getMembers(){
-        try {
-            const response = await fetch(
-                'http://localhost:3001/members',
-                {
-                    method:'get',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                }
-            )
-            if(response.ok){
-                const data = await response.json()
-                console.log('data',data) 
-                const datas = data[0].notifications_account
-                console.log('datas',datas)
-                const orders = data[0].notifications_orders
-                console.log('orders',orders)
-                const classsess = data[0].notifications_lesson
-                console.log('classsess',classsess)
-                console.log(data)
-                setAccountNotify(datas)
-                setOrdersNotify(orders)
-                setLessonNotify(classsess)
+    // async function getMembers(){
+    //     try {
+    //         const response = await fetch(
+    //             'http://localhost:3001/members',
+    //             {
+    //                 method:'get',
+    //                 headers: {
+    //                     Accept: 'application/json',
+    //                     'Content-Type': 'application/json',
+    //                 },
+    //             }
+    //         )
+    //         if(response.ok){
+    //             const data = await response.json()
+    //             console.log('data',data) 
+    //             const datas = data[0].notifications_account
+    //             console.log('datas',datas)
+    //             const orders = data[0].notifications_orders
+    //             console.log('orders',orders)
+    //             const classsess = data[0].notifications_lesson
+    //             console.log('classsess',classsess)
+    //             console.log(data)
+    //             setAccountNotify(datas)
+    //             setOrdersNotify(orders)
+    //             setLessonNotify(classsess)
                
-            } 
-        } catch(error) {
-            console.log('error',error)
-        }
-    }
+    //         } 
+    //     } catch(error) {
+    //         console.log('error',error)
+    //     }
+    // }
 
-    useEffect(()=>{
-        getMembers()
-    },[])
+    // useEffect(()=>{
+    //     getMembers()
+    // },[])
 
     return (
         <>
