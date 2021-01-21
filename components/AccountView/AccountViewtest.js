@@ -1,16 +1,16 @@
 import React, {useState,useEffect} from 'react'
 import { NavLink } from 'react-router-dom'
 import './AccountView.scss'
-// import {useParams,useHistory} from 'react-router-dom'
+import {useParams,useHistory} from 'react-router-dom'
 
 // 此頁為測試資料
 // 
-function AccountView(props) {
+function AccountViewtest(props) {
     const [members, setMembers] = useState('AccountViewtest')
     // 是否連到members資料?
     console.log('members?:',members); 
 
-    const [member, setMember] = useState()
+    const [member, setMember] = useState('')
 
     
     // const initialMember = {
@@ -52,25 +52,25 @@ function AccountView(props) {
     }
 
     // 無法取得特定id會員
-    async function getMember(id) {
-        try {
-            const response = await fetch(
-                'http://localhost:3001/members/',
-                {
-                    method:'get',
-                }
-            )
-            if(response.ok) {
-                const data2 = await response.json()
-                console.log('?:',data2) 
+    // async function getMember(id) {
+    //     try {
+    //         const response = await fetch(
+    //             'http://localhost:3001/members/' + id,
+    //             {
+    //                 method:'get',
+    //             }
+    //         )
+    //         if(response.ok) {
+    //             const data2 = await response.json()
+    //             console.log('?:',data2) 
                 
-                setMember(data2)
-                // console.log('???:',data);
-            }
-        } catch(error) {
-            alert('no data, try later')
-        }
-    }
+    //             setMember(data2)
+    //             // console.log('???:',data);
+    //         }
+    //     } catch(error) {
+    //         alert('no data, try later')
+    //     }
+    // }
 
     useEffect(()=>{
         getMembers()
@@ -146,4 +146,4 @@ function AccountView(props) {
     )
 }
 
-export default AccountView
+export default AccountViewtest
