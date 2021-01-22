@@ -23,6 +23,7 @@ router.get('/get/:id', async(req,res) => {
     res.json(user);
 })
 
+
 //delete specific item
 router.delete('/detele/:id', async(req,res) =>{
     const result = await member.findByIdAndDelete({_id:req.params.id})

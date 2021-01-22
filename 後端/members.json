@@ -145,4 +145,151 @@
   "member_address": "台中市南區文心路4號",
   "member_avatar": "http://localhost:3000/images/member/male.png",
   "__v": 1
+},{
+  "_id": 2,
+  "order_address": [
+    {
+      "addressCity": "台中市",
+      "addressDistrict": "南區",
+      "addressDetail": "文心路4號",
+      "receiver": "Vivian",
+      "phone": "0911228888",
+      "shipping_method": "宅配",
+      "address_tag": "j1"
+    },
+    {
+      "addressCity": "台中市",
+      "addressDistrict": "南區",
+      "addressDetail": "文心路10號",
+      "receiver": "John",
+      "phone": "0911223365",
+      "shipping_method": "宅配",
+      "address_tag": "j1"
+    }
+  ],
+  "member_creditcard": [
+    {
+      "card_tag": "玉山銀行",
+      "card_holder": "BILL",
+      "creditcard_number": "1547-8547-8598-9961",
+      "creditcard_last4": "9961",
+      "exp_date": "0231",
+      "security_code": "872",
+      "BillingCity": "台中市",
+      "BillingDistrict": "南區",
+      "BillingDetail": "文心路4號",
+      "payment_method": "信用卡"
+    }
+  ],
+  "collections": [
+    {
+      "product_id": "1",
+      "product_name": "落地虎尾蘭盆栽",
+      "product_category": "大型植栽",
+      "occation_category": [
+        "客廳空間布置",
+        "浴室空間布置",
+        "辦公室布置"
+      ],
+      "order_method": "租賃",
+      "product_price": "50/日",
+      "buffer_time": "1日",
+      "available_date": "2021/2/1",
+      "shipping_method": "宅配",
+      "product_img": "http://localhost:3000/images/images/rentprodlist/金邊虎尾蘭盆栽.jpg",
+      "product_detail_img1": "http://localhost:3000/images/images/rentproddetail/金邊虎尾蘭盆栽2.jpg",
+      "product_detail_img2": "http://localhost:3000/images/images/rentproddetail/金邊虎尾蘭盆栽3.jpg",
+      "product_detail_img3": "http://localhost:3000/images/images/rentproddetail/金邊虎尾蘭盆栽4.jpg",
+      "product_info": "28 x 28 x 70 (cm) \n 磨石子陶瓷盆栽",
+      "product_detail1": "金邊虎尾蘭，為龍舌蘭科多年生植物，無莖。植株高度可達 1.5 公尺左右。葉子正反兩面均有不規則的暗綠色雲層狀橫紋，如虎尾而得名。",
+      "product_detail2": "有曬太陽的虎尾蘭斑紋明顯，若想要將他們保持明顯紋路，窗邊是最基本的日照環境喔！",
+      "product_detail3": "每 4 週澆水一次，澆水量約 700 c.c，保持通風。",
+      "product_inventory": "50",
+      "rented_amount": "0",
+      "product_status": 1,
+      "create_date": "2021/1/15",
+      "remark": ""
+    }
+  ],
+  "user_rental": [
+    {
+      "order_rentalnumber": "012021020201",
+      "order_rentaldate": "2021-02-02",
+      "order_rentalprice": "NT$1000",
+      "order_rentalstatus": "租賃中",
+      "prod_rentalpics1": "http://localhost:3000/images/member/Fiddle 琴葉榕大型植栽.jpg",
+      "prod_rentalpics2": "http://localhost:3000/images/member/小天使大型植栽1.jpg"
+    }
+  ],
+  "user_purchase": [
+    {
+      "order_purchasenumber": "012021020201",
+      "order_purchasedate": "2021-02-03",
+      "order_purchaseprice": "NT$2000",
+      "order_purchasestatus": "待出貨",
+      "prod_purchasepics1": "http://localhost:3000/images/member/孔雀1.jpg",
+      "prod_purchasepics2": "http://localhost:3000/images/member/白菲通尼亞草1.jpg"
+    }
+  ],
+  "course_booking": [
+    {
+      "lesson_number": "01",
+      "name": "多肉玻璃屋手作課",
+      "type": "succlent",
+      "price": 2200,
+      "date": "2021-02-01",
+      "img": "http://localhost:3000/images/course/show/天光滿屋.jpg",
+      "banner": "http://localhost:3000/images/course/show/天光滿屋-banner.jpg",
+      "info_text": "鑲嵌玻璃製作的技術性難度較高，所使用的工具與材料也相對多，將有形的玻璃與無形的光封存在每件作品內。沒有學習過工藝創作的初學者也可以參與。由於每種顏色的玻璃燒製過程都並不相同，因此紋路與質感都不太一樣，這樣的透光差異正式玻璃鑲嵌迷人的地方。從玻璃切片、組合到立體焊接，完整學習整組技巧，將這項技術成為自己的技能，即可開啟之後的創作之路。",
+      "learn_text": [
+        "了解玻璃應用技法與原理",
+        "工具介紹與安全須知",
+        "學習玻璃切割與鑲嵌工法的銅箔包鑲",
+        "作品組合焊接",
+        "錫條熱融的技法",
+        "成品染色上蠟",
+        "多肉植物種植方法"
+      ],
+      "work_img": "http://localhost:3000/images/course/show/天光滿屋-work.jpg",
+      "work_text": [
+        "一組彩色鑲嵌玻璃屋（玻璃顏色樣式多種可選，於上課時讓學員自行搭配設計）。",
+        "多肉組盆（包含 4 種多肉，亦可上課時挑選）。"
+      ],
+      "hours": "14:00 ~ 16:00",
+      "teacher": "楊盈君",
+      "people": 10,
+      "demo_img1": "http://localhost:3000/images/course/show/天光滿屋-demo-img1.jpg",
+      "demo_img2": "http://localhost:3000/images/course/show/天光滿屋-demo-img2.jpg",
+      "lesson_status": "已預約",
+      "lesson_location": "320桃園市中壢區中大路300號國立中央大學",
+      "lesson_note": "請學員自行攜帶......"
+    }
+  ],
+  "notifications_account": [
+    {
+      "accountnotify_title": "【帳戶通知】",
+      "accountnotify_content": "您在2021年1月29日修改了個人檔案"
+    }
+  ],
+  "notifications_orders": [
+    {
+      "orderlistnotify_title": "【訂單通知】",
+      "orderlistnotify_content": "您在2021年1月29日訂購了琴葉榕大型植栽"
+    }
+  ],
+  "notifications_lesson": [
+    {
+      "lessonnotify_title": "【課程通知】",
+      "lessonnotify_content": "您在2021年1月29日預約了多肉玻璃屋手作課"
+    }
+  ],
+  "member_account": "dsamworth1@shutterfly.com",
+  "member_name": "Daryle",
+  "member_password": "yle45237561",
+  "member_gender": "不透露",
+  "member_phone": "0911333222",
+  "member_birthdate": "1989-02-21",
+  "member_address": "新竹市東區食品路69號",
+  "member_avatar": "http://localhost:3000/images/member/male.png",
+  "__v": 0
 }]
