@@ -1,8 +1,9 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
 .w-wrapper {
+  max-width: 1440px;
   width: 1200px;
-  margin: auto;
+  margin: 0 auto;
 
   .w-card {
     min-width: 200px;
