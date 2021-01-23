@@ -4,11 +4,9 @@ import {withRouter,useHistory} from 'react-router-dom'
 // 測試data
 // import data from '../../data/users'
 
-function ProfileEdit() {
-    // 目前只取id=1的會員
+function ProfileEdittest() {
     const _id = 1;
-
-    const [members, setMembers] = useState('ProfileEdit')
+    const [members, setMembers] = useState('ProfileEdittest')
     // console.log('members:',members)
     const [member, setMember] = useState('')
     // console.log('member:',member)
@@ -147,8 +145,7 @@ function ProfileEdit() {
                                 className="form-control" 
                                 id="exampleFormControlSelect1"
                                 Value={member_Gender}
-                                readonly
-                                disabled
+                                readOnly="readonly"
                             />
                             {/* <select 
                                 className="form-control" 
@@ -215,4 +212,4 @@ function ProfileEdit() {
     )
 }
 
-export default withRouter(ProfileEdit)
+export default withRouter(ProfileEdittest)

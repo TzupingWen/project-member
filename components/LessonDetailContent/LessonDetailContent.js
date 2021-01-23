@@ -1,13 +1,26 @@
 import React, {useState,useEffect} from 'react'
 import './LessonDetailContent.scss'
+import {withRouter} from 'react-router-dom'
+import LessonDetail from '../../pages/LessonDetail'
 
 // 測試data
 // import data from '../../data/lessondata'
 
-    function LessonDetailContent() {
+function LessonDetailContent(props) {
     const [lessonDetail, setLessonDetail] = useState([])
+    console.log('lessonDetail?:',lessonDetail)
+    // lessonDetail x
 
-    async function getMember(){
+    // console.log(props.data)
+    // console.log('props:',props)
+
+    const course_id = LessonDetail.lesson_number
+    
+    // const course_id = lesson_number
+
+    async function getCourse(){
+        // 先設為1
+        // const member_id = 1
         try {
             const response = await fetch(
                 'http://localhost:3001/members',
@@ -22,9 +35,12 @@ import './LessonDetailContent.scss'
             if(response.ok){
                 const data = await response.json()
                 const datas = data[0].course_booking
+                // console.log(course_id)
+                console.log('data:',data)
+                console.log('datas:',datas)
+                console.log('course_id:',datas[0].lesson_number)
 
-                console.log(data)
-                setLessonDetail(datas)
+                setLessonDetail(datas[0])
                 
             } 
         } catch(error) {
@@ -32,17 +48,48 @@ import './LessonDetailContent.scss'
         }
     }
 
+
+    // x
+    // async function getCourse(){
+    //     // 先設為1
+    //     // const member_id = 1
+    //     try {
+    //         const response = await fetch(
+    //             // `http://localhost:3001/members/get/${member_id}/`+ course_id,
+    //             {
+    //                 method:'get',
+    //                 // headers: {
+    //                 //     Accept: 'application/json',
+    //                 //     'Content-Type': 'application/json',
+    //                 // },
+    //             }
+    //         )
+    //         if(response.ok){
+    //             const data = await response.json()
+    //             const datas = data[0].course_booking
+    //             // console.log(course_id)
+    //             // console.log('data:',data)
+    //             // console.log('datas:',datas)
+    //             // console.log('course_id:',datas[0].lesson_number)
+
+    //             setLessonDetail(datas)
+    //             console.log('lessonDetail:',lessonDetail)
+                
+    //         } 
+    //     } catch(error) {
+    //         alert('no data')
+    //     }
+    // }
+
     useEffect(()=>{
-        getMember()
+        getCourse()
     },[])
-
-
+   
    
     return (
         <>
-        {lessonDetail.map((classes)=>{
-            return(
-                <div key={classes.id}>
+        {/* ※目前只取到會員的第1筆課程 */}
+                <div>
                 <div className="w-div-title pl-4">
                     <p>課程預約詳情</p>
                 </div>
@@ -52,41 +99,39 @@ import './LessonDetailContent.scss'
                                 <div>
                                 <tr>
                                     <th scope="row">課程名稱：</th>
-                                    <td>{classes.name}</td>
+                                    <td>{lessonDetail.name}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">課程時間：</th>
-                                    <td>{classes.date} {classes.lesson_time}</td>
+                                    <td>{lessonDetail.date} {lessonDetail.hours}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">課程費用：</th>
-                                    <td>NT$ {classes.price}</td>
+                                    <td>NT$ {lessonDetail.price}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">預約狀態：</th>
-                                    <td className="w-booking-status">{classes.lesson_status}</td>
+                                    <td className="w-booking-status">{lessonDetail.lesson_status}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">上課地點：</th>
-                                    <td>{classes.lesson_location}</td>
+                                    <td>{lessonDetail.lesson_location}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">備註：</th>
-                                    <td>{classes.lesson_note}</td>
+                                    <td>{lessonDetail.lesson_note}</td>
                                 </tr>
                                 </div>
                         </tbody>
                     </table>
                 </div>
                 <div>
-                    <img className="w-lessondetailpics" src={classes.img} alt="" />
+                    <img className="w-lessondetailpics" src={lessonDetail.img} alt="" />
                 </div>
             </div>
-            )
-        })}
         </>
     )
     
 }
 
-export default LessonDetailContent
+export default withRouter(LessonDetailContent)

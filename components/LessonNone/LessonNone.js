@@ -8,7 +8,8 @@ function LessonNone() {
         <div className="w-collect-none">
             <p>目前還沒有預約課程，來去逛逛吧</p>
             <div>        
-                <NavLink to="/lesson" className="w-btn-viewlesson">教學課程</NavLink>                
+            {/* 這個button要連結到所有課程瀏覽的頁面 */}
+                <NavLink to="/" className="w-btn-viewlesson">教學課程</NavLink>                
             </div>   
         </div>
         </>

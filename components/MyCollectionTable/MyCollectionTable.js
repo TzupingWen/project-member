@@ -2,13 +2,14 @@ import React, {useState,useEffect} from 'react'
 import './MyCollectionTable.scss'
 import ClicktoCartButton from '../ClicktoCartButton/ClicktoCartButton'
 import {Modal, Button} from 'react-bootstrap'
-import {NavLink} from 'react-router-dom'
+import {NavLink,useHistory,withRouter} from 'react-router-dom'
+import MyCollectionNone from '../MyCollectionNone/MyCollectionNone'
 
 
 // 測試data
 // import data from '../../data/collectionsdata'
 
-function MyCollectionTable() {
+function MyCollectionTable(props) {
     const [collections, setCollections] = useState([])
     // console.log('collections:',collections)
 
@@ -17,8 +18,8 @@ function MyCollectionTable() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [hasData, setHasData] = useState(false)
 
+    let history = useHistory()
 
     // const _id = 1
 
@@ -36,7 +37,10 @@ function MyCollectionTable() {
                 const data = await response.json()
                 const datas = data[0].collections
 
-                setCollections(datas)
+                // setCollections(datas)
+
+                // window.location.reload()
+                history.push('/MyCollections')
                
             } 
         } catch(error) {
@@ -175,21 +179,22 @@ function MyCollectionTable() {
     )
 
     const none = (
-        <>
-        <div className="w-collect-none">
-            <p>目前還沒有收藏商品，快去選購吧</p>
-            <div className="d-flex">
-                <NavLink to="/member" className="w-btn-viewlesson">植物租賃</NavLink>                
-                <NavLink to="/member" className="w-btn-viewlesson">植物選購</NavLink>  
-            </div>   
-        </div>
-        </>
+        <MyCollectionNone />
+        // <MyCollectionNone>
+        // <div className="w-collect-none">
+        //     <p>目前還沒有收藏商品，快去選購吧</p>
+        //     <div className="d-flex">
+        //         <NavLink to="/member" className="w-btn-viewlesson">植物租賃</NavLink>                
+        //         <NavLink to="/member" className="w-btn-viewlesson">植物選購</NavLink>  
+        //     </div>   
+        // </div>
+        // </MyCollectionNone>
     )
 
 
     return (
         <>
-        {hasData ? none : display}
+        {collections == 0 ? none : display }
         {/* <table className="table" style={{width: 900}}>
                         <thead className="w-mycollect-tablehead" style={{backgroundColor: '#E6E9DA'}}>
                             <tr>
@@ -258,4 +263,4 @@ function MyCollectionTable() {
     )
 }
 
-export default MyCollectionTable
+export default withRouter(MyCollectionTable)

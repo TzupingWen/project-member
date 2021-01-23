@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react'
-import {useHistory} from 'react-router-dom'
+import {useHistory,withRouter} from 'react-router-dom'
 import './Member.scss'
 import MemberHeader from '../components/MemberHeader/MemberHeader'
 import MemberAvatar from '../components/MemberAvatar/MemberAvatar'
@@ -14,7 +14,7 @@ import MyCollectionContent from '../components/MyCollectionContent/MyCollectionC
 import OrderlistTableRental from '../components/OrderlistTableRental/OrderlistTableRental'
 import PurchaseOrderContent from '../components/PurchaseOrderContent/PurchaseOrderContent'
 import LessonContent from '../components/LessonContent/LessonContent'
-import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
+// import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
 
 //測試帳戶資訊
 // import AccountViewtest from '../components/AccountView/AccountViewtest'
@@ -31,7 +31,7 @@ function Member(props) {
         <Router>
         <>
         <MemberHeader />
-        <MyBreadcrumb />
+        {/* <MyBreadcrumb /> */}
         <section className="w-wrapper d-flex">
             <div className="w-card">
                 <MemberAvatar />
@@ -85,4 +85,4 @@ function Member(props) {
     )
 }
 
-export default Member
+export default withRouter(Member)

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const autoincrement = require('mongoose-sequence')(mongoose) //
 const memberSchema = new mongoose.Schema({
     _id:Number,
     member_account:{
@@ -88,4 +88,5 @@ const memberSchema = new mongoose.Schema({
         required:true
     }, 
 },{_id:false})
+memberSchema.plugin(autoincrement) //
 module.exports = mongoose.model('member', memberSchema)

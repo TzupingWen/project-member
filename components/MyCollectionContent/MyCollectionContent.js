@@ -2,12 +2,13 @@ import React, {useState} from 'react'
 import './MyCollectionContent.scss'
 import MyCollectionTable from '../MyCollectionTable/MyCollectionTable'
 import MyCollectionNone from '../MyCollectionNone/MyCollectionNone'
+import {withRouter} from 'react-router-dom'
 
-function MyCollectionContent() {
+function MyCollectionContent(props) {
     const [data, setData] = useState(false)
 
-    const display = <MyCollectionTable />
-    const none = <MyCollectionNone />
+    // const display = <MyCollectionTable />
+    // const none = <MyCollectionNone />
 
     return (
         <>
@@ -16,14 +17,12 @@ function MyCollectionContent() {
                     <p>我的收藏</p>
                 </div>
                 <div className="w-collect-main px-2">
-                    {/* 有收藏則顯示table，無收藏則顯示none */}
-                    {data ? none : display}
-                    {/* <MyCollectionTable /> */}
-                    {/* <MyCollectionNone /> */}
+                    <MyCollectionTable />
+
                 </div>
             </div>  
         </>
     )
 }
 
-export default MyCollectionContent
+export default withRouter(MyCollectionContent)

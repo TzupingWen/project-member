@@ -4,7 +4,7 @@ import MemberHeader from '../components/MemberHeader/MemberHeader'
 import MemberAvatar from '../components/MemberAvatar/MemberAvatar'
 import MemberContent from '../components/MemberContent/MemberContent'
 import OrderlistTableRental from '../components/OrderlistTableRental/OrderlistTableRental'
-import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
+// import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
 
 function RentalOrder(props) {
     const {isAuth} = props
@@ -12,7 +12,7 @@ function RentalOrder(props) {
     return (
         <>
         <MemberHeader />
-        <MyBreadcrumb />
+        {/* <MyBreadcrumb /> */}
         {/* test */}
         {/* {isAuth ? '會員登入，xxx你好' : '未登入'} */}
 

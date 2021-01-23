@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import './LatestNews.scss'
 import { BsChevronRight } from "react-icons/bs"
-// import {Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 function LatestNews(props) {
     const [accountNotify, setAccountNotify] = useState([])
@@ -69,4 +69,4 @@ function LatestNews(props) {
     )
 }
 
-export default LatestNews
+export default withRouter(LatestNews)

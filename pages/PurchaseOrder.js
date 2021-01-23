@@ -4,7 +4,7 @@ import MemberHeader from '../components/MemberHeader/MemberHeader'
 import MemberAvatar from '../components/MemberAvatar/MemberAvatar'
 import MemberContent from '../components/MemberContent/MemberContent'
 import PurchaseOrderContent from '../components/PurchaseOrderContent/PurchaseOrderContent'
-import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
+// import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
 
 function PurchaseOrder(props) {
     const {isAuth} = props
@@ -12,7 +12,7 @@ function PurchaseOrder(props) {
     return (
         <>
         <MemberHeader />
-        <MyBreadcrumb />
+        {/* <MyBreadcrumb /> */}
         {/* test */}
         {/* {isAuth ? '會員登入，xxx你好' : '未登入'} */}
         

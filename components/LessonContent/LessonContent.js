@@ -1,13 +1,14 @@
 import React, {useState,useEffect} from 'react'
 import './LessonContent.scss'
-import LessonNone from '../LessonNone/LessonNone'
+// import LessonNone from '../LessonNone/LessonNone'
 import LessonBookinglist from '../LessonBookinglist/LessonBookinglist'
+import {withRouter} from 'react-router-dom'
 
 function LessonContent() {
     const [data, setData] = useState(false)
 
-    const display = <LessonBookinglist />
-    const none = <LessonNone />
+    // const display = <LessonBookinglist />
+    // const none = <LessonNone />
 
     return (
         <>
@@ -16,9 +17,7 @@ function LessonContent() {
             <p>課程預約管理</p>
         </div>
                 <div className="w-orderlist-main px-2">
-                    {/* 有預約課程則顯示LessonBookinglist元件，無預約則顯示LessonNone元件 */}
-                    {data ? none : display}
-                    {/* <LessonBookinglist /> */}
+                    <LessonBookinglist />
                     {/* <LessonNone /> */}
                 </div>
             </div>
@@ -26,4 +25,4 @@ function LessonContent() {
     )
 }
 
-export default LessonContent
+export default withRouter(LessonContent)

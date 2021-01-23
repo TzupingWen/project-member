@@ -3,8 +3,9 @@ import MemberAvatar from '../components/MemberAvatar/MemberAvatar'
 import MemberContent from '../components/MemberContent/MemberContent'
 import MemberHeader from '../components/MemberHeader/MemberHeader'
 import MyCollectionContent from '../components/MyCollectionContent/MyCollectionContent'
+import {withRouter} from 'react-router-dom'
 import './Member.scss'
-import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
+// import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
 
 function MyCollections(props) {
     const {isAuth} = props
@@ -12,7 +13,7 @@ function MyCollections(props) {
     return (
         <>
         <MemberHeader />
-        <MyBreadcrumb />
+        {/* <MyBreadcrumb /> */}
         {/* test */}
         {/* {isAuth ? '會員登入，xxx你好' : '未登入'} */}
         
@@ -29,4 +30,4 @@ function MyCollections(props) {
     )
 }
 
-export default MyCollections
+export default withRouter(MyCollections)

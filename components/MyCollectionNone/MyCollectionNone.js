@@ -8,8 +8,10 @@ function MyCollectionNone() {
         <div className="w-collect-none">
             <p>目前還沒有收藏商品，快去選購吧</p>
             <div className="d-flex">
-                <NavLink to="/member" className="w-btn-viewlesson">植物租賃</NavLink>                
-                <NavLink to="/member" className="w-btn-viewlesson">植物選購</NavLink>  
+            {/* 租賃button要連結到所有租賃商品的頁面 */}
+                <NavLink to="/" className="w-btn-viewlesson">植物租賃</NavLink>
+            {/* 選購button要連結到所有選購商品的頁面 */}
+                <NavLink to="/" className="w-btn-viewlesson">植物選購</NavLink>  
             </div>   
         </div>
         </>
