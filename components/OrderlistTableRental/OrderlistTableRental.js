@@ -2,9 +2,10 @@ import React, {useState,useEffect} from 'react'
 import './OrderlistTableRental.scss'
 import Pagination from '../Pagination/Pagination'
 import ClicktoDetailButton from '../ClicktoDetailButton/ClicktoDetailButton'
+import { withRouter } from 'react-router-dom'
 
 
-function OrderlistTableRental() {
+function OrderlistTableRental(props) {
     const [rentalorders, setRentalorders] = useState([])
 
     async function getMembers(){
@@ -93,4 +94,4 @@ function OrderlistTableRental() {
     )
 }
 
-export default OrderlistTableRental
+export default withRouter(OrderlistTableRental)

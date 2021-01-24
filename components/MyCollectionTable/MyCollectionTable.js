@@ -5,7 +5,6 @@ import {Modal, Button} from 'react-bootstrap'
 import {NavLink,useHistory,withRouter} from 'react-router-dom'
 import MyCollectionNone from '../MyCollectionNone/MyCollectionNone'
 
-
 // 測試data
 // import data from '../../data/collectionsdata'
 
@@ -34,12 +33,12 @@ function MyCollectionTable(props) {
             )
             if(response.ok){
                 // reload data
-                const data = await response.json()
-                const datas = data[0].collections
+                // const data = await response.json()
+                // const datas = data[0].collections
 
                 // setCollections(datas)
-
                 // window.location.reload()
+                getCollections()
                 history.push('/MyCollections')
                
             } 
@@ -50,7 +49,7 @@ function MyCollectionTable(props) {
 
 
 
-    async function getMembers(){
+    async function getCollections(){
         try {
             const response = await fetch(
                 'http://localhost:3001/members',
@@ -105,7 +104,7 @@ function MyCollectionTable(props) {
     // }
 
     useEffect(()=>{
-        getMembers()
+        getCollections()
         // getMember(_id)
     },[])
 
@@ -158,8 +157,8 @@ function MyCollectionTable(props) {
                                             type="button" 
                                             className="close w-remove" 
                                             aria-label="Close" 
-                                            onClick={()=>{deleteCollections({i})}}>
-                                            <span aria-hidden="true">刪除收藏！</span>
+                                            onClick={()=>{deleteCollections(v.index)}}>
+                                            <span aria-hidden="true">是，刪除收藏！</span>
                                             </button>
                                             </Modal.Body>
                                             <Modal.Footer>

@@ -2,8 +2,10 @@ import React, {useState, useEffect} from 'react'
 import './OrderlistTablePurchase.scss'
 import Pagination from '../Pagination/Pagination'
 import ClicktoDetailButton from '../ClicktoDetailButton/ClicktoDetailButton'
+import {withRouter} from 'react-router-dom'
+import OrderlistNoPurchase from '../OrderlistNoPurchase/OrderlistNoPurchase'
 
-function OrderlistTablePurchase() {
+function OrderlistTablePurchase(props) {
     const [purchaseorders, setPurchaseorders] = useState([])
 
     async function getMembers(){
@@ -35,7 +37,7 @@ function OrderlistTablePurchase() {
         getMembers()
     },[])
 
-    return (
+    const display = (
         <>
         <table className="table table-responsive w-orderlist-buy-table" style={{width: 900}}>
                     <thead style={{backgroundColor: '#E6E9DA'}}>
@@ -84,6 +86,16 @@ function OrderlistTablePurchase() {
                     <Pagination />
         </>
     )
+
+    const none = (
+        <OrderlistNoPurchase />
+    )
+
+    return (
+        <>
+        {purchaseorders == 0 ? none : display }
+        </>
+    )
 }
 
-export default OrderlistTablePurchase
+export default withRouter(OrderlistTablePurchase)

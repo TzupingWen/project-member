@@ -31,12 +31,13 @@ function LessonBookinglist(props) {
                 }
             )
             if(response.ok){
-                // 重新載入頁面
-                const data = await response.json()
-                const datas = data[0].course_booking
+                // 重新載入
+                // const data = await response.json()
+                // const datas = data[0].course_booking
 
                 // console.log(data)
-                setLessonbookings(datas)
+                // setLessonbookings(datas)
+                getCourse()
                 history.push('/lesson')
                 
             } 
@@ -45,16 +46,16 @@ function LessonBookinglist(props) {
         }
     }
 
-    async function getMembers(){
+    async function getCourse(){
         try {
             const response = await fetch(
                 'http://localhost:3001/members',
                 {
                     method:'get',
-                    // headers: {
-                    //     Accept: 'application/json',
-                    //     'Content-Type': 'application/json',
-                    // },
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
                 }
             )
             if(response.ok){
@@ -62,12 +63,10 @@ function LessonBookinglist(props) {
                 const datas = data[0].course_booking
                 // const course_id = datas[0].lesson_number
                 // console.log('data?',data)
-                console.log('datas?',datas)
-                console.log('course_id:' ,datas[0].lesson_number)
+                // console.log('datas?',datas)
+                // console.log('course_id:' ,datas[0].lesson_number)
                 
                 setLessonbookings(datas)
-                
-                
             } 
         } catch(error) {
             console.log('error:',error)
@@ -75,7 +74,7 @@ function LessonBookinglist(props) {
     }
 
     useEffect(()=>{
-        getMembers()
+        getCourse()
     },[])
 
     const display = (
@@ -117,9 +116,7 @@ function LessonBookinglist(props) {
                         {/* 課程詳情&取消預約按鈕 */}
                         <td className="align-middle">
                         {/* <ClicktoLessonButton /> */}
-                        {/* 課程詳情頁面：不要用link，改用location href，或用push */}
                         <NavLink to={`/lesson/lessondetail/${v.lesson_number}`} className="w-btn-lessondetail">課程詳情</NavLink>
-                        
                         <button 
                             type="button" 
                             className="w-btn-cancellesson"
@@ -128,14 +125,14 @@ function LessonBookinglist(props) {
                             取消預約</button> 
                                         <Modal show={show} onHide={handleClose}>
                                         <Modal.Header closeButton>
-                                        <Modal.Title>是否取消預約？</Modal.Title>
+                                        <Modal.Title>取消預約？</Modal.Title>
                                         </Modal.Header>
                                             <Modal.Body>
                                             <button 
                                             type="button" 
                                             className="close w-remove" 
                                             aria-label="Close" 
-                                            onClick={()=>{deleteCourse({i})}}>
+                                            onClick={()=>{deleteCourse(v.index)}}>
                                             <span aria-hidden="true">是，我要取消！</span>
                                             </button>
                                             </Modal.Body>

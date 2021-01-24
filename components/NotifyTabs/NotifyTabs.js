@@ -62,19 +62,20 @@ function NotifyTabs() {
             )
             if(response.ok){
                 // reload data
-                const data = await response.json()
-                const datas = data[0].notifications_account
+                // const data = await response.json()
+                // const datas = data[0].notifications_account
                 // console.log(datas)
-                const orders = data[0].notifications_orders
-                const classsess = data[0].notifications_lesson
+                // const orders = data[0].notifications_orders
+                // const classsess = data[0].notifications_lesson
 
+                // setAccountNotify(datas)
+                // setOrdersNotify(orders)
+                // setLessonNotify(classsess)
+                getNotifications()
+                
                 history.push('/Notifications')
- 
-                setAccountNotify(datas)
-                setOrdersNotify(orders)
-                setLessonNotify(classsess)
 
-                window.location.reload()
+                // window.location.reload()
                 
             } 
         } catch(error) {
@@ -82,7 +83,7 @@ function NotifyTabs() {
         }
     }
 
-    async function getMembers(){
+    async function getNotifications(){
         try {
             const response = await fetch(
                 'http://localhost:3001/members',
@@ -145,7 +146,7 @@ function NotifyTabs() {
     // }
 
     useEffect(()=>{
-        getMembers()
+        getNotifications()
     },[])
 
 
@@ -195,7 +196,8 @@ function NotifyTabs() {
                                             className="close w-remove" 
                                             // id="w-rrrmove" 
                                             aria-label="Close" 
-                                            onClick={()=>{deleteNotifications({i})}}
+                                            onClick={
+                                                ()=>{deleteNotifications(v.index)}}
                                             >
                                             <span aria-hidden="true">是，刪除它！</span>
                                             </button>

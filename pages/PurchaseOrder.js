@@ -4,6 +4,7 @@ import MemberHeader from '../components/MemberHeader/MemberHeader'
 import MemberAvatar from '../components/MemberAvatar/MemberAvatar'
 import MemberContent from '../components/MemberContent/MemberContent'
 import PurchaseOrderContent from '../components/PurchaseOrderContent/PurchaseOrderContent'
+import {withRouter} from 'react-router-dom'
 // import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
 
 function PurchaseOrder(props) {
@@ -29,4 +30,4 @@ function PurchaseOrder(props) {
     )
 }
 
-export default PurchaseOrder
+export default withRouter(PurchaseOrder)

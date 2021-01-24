@@ -4,6 +4,7 @@ import MemberHeader from '../components/MemberHeader/MemberHeader'
 import MemberAvatar from '../components/MemberAvatar/MemberAvatar'
 import MemberContent from '../components/MemberContent/MemberContent'
 import OrderlistTableRental from '../components/OrderlistTableRental/OrderlistTableRental'
+import {withRouter} from 'react-router-dom'
 // import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
 
 function RentalOrder(props) {
@@ -29,4 +30,4 @@ function RentalOrder(props) {
     )
 }
 
-export default RentalOrder
+export default withRouter(RentalOrder)
