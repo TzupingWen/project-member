@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import './ProfileEdit.scss'
 import {withRouter,useHistory} from 'react-router-dom'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 // 測試data
 // import data from '../../data/users'
 
@@ -22,6 +25,9 @@ function ProfileEdit() {
 
     // let {id} = useParams()
     let history = useHistory()
+
+    // sweet alert
+    const MySwal = withReactContent(Swal)
 
     async function updateMember(id) {
         const newMember = {
@@ -150,17 +156,6 @@ function ProfileEdit() {
                                 readonly
                                 disabled
                             />
-                            {/* <select 
-                                className="form-control" 
-                                id="exampleFormControlSelect1"
-                                Value={members[0].member_gender}
-                                checked
-                                onChange={(e)=>(setMember_Gender(e.target.value))}
-                                >
-                                <option value="不透露">不透露</option>
-                                <option value="男">男</option>
-                                <option value="女">女</option>
-                            </select> */}
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleFormControlInput3">手機 Phone</label>
@@ -170,7 +165,6 @@ function ProfileEdit() {
                                 id="exampleFormControlInput3"
                                 Value={member_Phone}
                                 onChange={(e)=>(setMember_Phone(e.target.value))} 
-
                                 />
                         </div>
                         <div className="form-group">
@@ -181,14 +175,6 @@ function ProfileEdit() {
                                 Value={member_Birthdate}
                                 readOnly="readonly"
                             />
-                            {/* <div className="d-flex">
-                                <input
-                                    type="date"
-                                    id="exampleFormControlInput4"
-                                    Value={members[0].member_birthdate}
-                                    onChange={(e)=>(setMember_Birthdate(e.target.value))}
-                                    />
-                            </div> */}
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleFormControlInput5">地址 Address</label>
@@ -205,8 +191,26 @@ function ProfileEdit() {
                         type="button" 
                         className="btn w-editsavebutton"
                         onClick={()=>{
-                            updateMember(1)}} 
+                            MySwal.fire({
+                                title: '確定修改?',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: '是，我要修改!'
+                                }).then((result) => {
+                                if (result.isConfirmed) 
+                                {
+                                    Swal.fire(
+                                    '已儲存!',
+                                    updateMember(1),
+                                    'success'
+                                    )
+                                }
+                                })
+                            }} 
                         >儲存修改 Save</button>
+                   
                 </div>
             </div>
             </div>

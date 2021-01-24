@@ -5,6 +5,8 @@ import ClicktoLessonButton from '../ClicktoLessonButton/ClicktoLessonButton'
 import {Modal, Button} from 'react-bootstrap'
 import {NavLink, useHistory, withRouter} from 'react-router-dom'
 import LessonNone from '../LessonNone/LessonNone'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 function LessonBookinglist(props) {
     const [lessonbookings, setLessonbookings] = useState([])
@@ -14,6 +16,9 @@ function LessonBookinglist(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     
+    // sweet alert
+    const MySwal = withReactContent(Swal)
+
     let history = useHistory()
 
     // useEffect(()=> {
@@ -117,7 +122,32 @@ function LessonBookinglist(props) {
                         <td className="align-middle">
                         {/* <ClicktoLessonButton /> */}
                         <NavLink to={`/lesson/lessondetail/${v.lesson_number}`} className="w-btn-lessondetail">課程詳情</NavLink>
-                        <button 
+                        <button
+                                            type="button" 
+                                            className="w-btn-cancellesson"  
+                                            onClick={()=>{
+                                                MySwal.fire({
+                                                    title: '是否刪除訊息？',
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#3085d6',
+                                                    cancelButtonColor: '#d33',
+                                                    confirmButtonText: '是，我要刪除!'
+                                                    }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        Swal.fire(
+                                                        'Deleted!',
+                                                        deleteCourse(v.index),
+                                                        'success'
+                                                        )
+                                                    }
+                                                    })
+                                            }}
+                                            >
+                                            取消預約
+                                        </button>
+                        
+                        {/* <button 
                             type="button" 
                             className="w-btn-cancellesson"
                             data-toggle="modal" data-target="#exampleModal"
@@ -141,7 +171,7 @@ function LessonBookinglist(props) {
                                                 否，回到課程管理
                                             </Button>
                                             </Modal.Footer>
-                                        </Modal>
+                                        </Modal> */}
                         
                         </td>
                         </tr>

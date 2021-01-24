@@ -2,6 +2,8 @@ import React, {useState,useEffect} from 'react'
 import './NotifyTabs.scss'
 import {Tabs, Tab, Modal, Button} from 'react-bootstrap'
 import {useHistory,withRouter} from 'react-router-dom'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 function NotifyTabs() {
     // Tab對應的eventKey
@@ -19,37 +21,9 @@ function NotifyTabs() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    // x 未取得members內的訊息
-    // async function deleteMembers(){
-    //     try {
-    //         const response = await fetch(
-    //             'http://localhost:3001/members/delete/1',
-    //             {
-    //                 // method:'delete',
-    //                 method:'put'
-    //             }
-    //         )
-    //         if(response.ok){
-    //             const data = await response.json()
-    //             // data是所有會員資料
-    //             const datas1 = data[0].notifications_account
-    //             console.log(datas1)
-    //             const orders = data[0].notifications_orders
-    //             console.log(orders)
-    //             const classsess = data[0].notifications_lesson
-    //             console.log(classsess)
-                
-    //             setAccountNotify(null)
-    //             setOrdersNotify(null)
-    //             setLessonNotify(null)
+    // sweet alert
+    const MySwal = withReactContent(Swal)
 
-    //             // getMembers()
-
-    //         } 
-    //     } catch(error) {
-    //         console.log('error',error)
-    //     }
-    // }
 
     async function deleteNotifications(index){
         const member_id = 1
@@ -115,35 +89,6 @@ function NotifyTabs() {
         }
     }
 
-    // can't get user id
-    // async function getMember(id){
-    //     try {
-    //         const response = await fetch(
-    //             'http://localhost:3001/members/get/:id',
-    //             {
-    //                 method:'get',
-    //                 headers: {
-    //                     Accept: 'application/json',
-    //                     'Content-Type': 'application/json',
-    //                 },
-    //             }
-    //         )
-    //         if(response.ok){
-    //             const data = await response.json()
-    //             const datas = data[0].notifications_account
-    //             const orders = data[0].notifications_orders
-    //             const classsess = data[0].notifications_lesson
-
-    //             // console.log(data)
-    //             setAccountNotify(datas)
-    //             setOrdersNotify(orders)
-    //             setLessonNotify(classsess)
-    //             // console.log(response.data[0].notifications_account)
-    //         } 
-    //     } catch(error) {
-    //         console.log('error',error)
-    //     }
-    // }
 
     useEffect(()=>{
         getNotifications()
@@ -178,7 +123,33 @@ function NotifyTabs() {
                                         {v.accountnotify_content}
                                         </td>
                                         <td>
-                                        <button 
+                                        <button
+                                            type="button" 
+                                            className="close w-remove" 
+                                            id="w-rrrmove" 
+                                            aria-label="Close" 
+                                            onClick={()=>{
+                                                MySwal.fire({
+                                                    title: '是否刪除訊息？',
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#3085d6',
+                                                    cancelButtonColor: '#d33',
+                                                    confirmButtonText: '是，我要刪除!'
+                                                    }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        Swal.fire(
+                                                        'Deleted!',
+                                                        deleteNotifications(v.index),
+                                                        'success'
+                                                        )
+                                                    }
+                                                    })
+                                            }}
+                                            >
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        {/* <button 
                                             type="button" 
                                             className="close w-remove" 
                                             id="w-rrrmove" 
@@ -207,7 +178,7 @@ function NotifyTabs() {
                                                 否，回到訊息通知
                                             </Button>
                                             </Modal.Footer>
-                                        </Modal>
+                                        </Modal> */}
                                         </td>
                                     </tr>
                                 </tbody>
@@ -230,7 +201,33 @@ function NotifyTabs() {
                                         {v.orderlistnotify_content}
                                         </td>
                                         <td>
-                                        <button 
+                                        <button
+                                            type="button" 
+                                            className="close w-remove" 
+                                            id="w-rrrmove" 
+                                            aria-label="Close" 
+                                            onClick={()=>{
+                                                MySwal.fire({
+                                                    title: '是否刪除訊息？',
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#3085d6',
+                                                    cancelButtonColor: '#d33',
+                                                    confirmButtonText: '是，我要刪除!'
+                                                    }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        Swal.fire(
+                                                        'Deleted!',
+                                                        deleteNotifications(v.index),
+                                                        'success'
+                                                        )
+                                                    }
+                                                    })
+                                            }}
+                                            >
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        {/* <button 
                                             type="button" 
                                             className="close w-remove" 
                                             id="w-rrrmove" 
@@ -257,7 +254,7 @@ function NotifyTabs() {
                                                 否，回到訊息通知
                                             </Button>
                                             </Modal.Footer>
-                                        </Modal>
+                                        </Modal> */}
                                         </td>
                                     </tr>
                                 </tbody>
@@ -280,7 +277,33 @@ function NotifyTabs() {
                                         {v.lessonnotify_content}
                                         </td>
                                         <td>
-                                        <button 
+                                        <button
+                                            type="button" 
+                                            className="close w-remove" 
+                                            id="w-rrrmove" 
+                                            aria-label="Close" 
+                                            onClick={()=>{
+                                                MySwal.fire({
+                                                    title: '是否刪除訊息？',
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#3085d6',
+                                                    cancelButtonColor: '#d33',
+                                                    confirmButtonText: '是，我要刪除!'
+                                                    }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        Swal.fire(
+                                                        'Deleted!',
+                                                        deleteNotifications(v.index),
+                                                        'success'
+                                                        )
+                                                    }
+                                                    })
+                                            }}
+                                            >
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        {/* <button 
                                             type="button" 
                                             className="close w-remove" 
                                             id="w-rrrmove" 
@@ -307,7 +330,7 @@ function NotifyTabs() {
                                                 否，回到訊息通知
                                             </Button>
                                             </Modal.Footer>
-                                        </Modal>
+                                        </Modal> */}
                                         </td>
                                     </tr>
                                     

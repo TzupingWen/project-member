@@ -4,6 +4,8 @@ import ClicktoCartButton from '../ClicktoCartButton/ClicktoCartButton'
 import {Modal, Button} from 'react-bootstrap'
 import {NavLink,useHistory,withRouter} from 'react-router-dom'
 import MyCollectionNone from '../MyCollectionNone/MyCollectionNone'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 // 測試data
 // import data from '../../data/collectionsdata'
@@ -17,6 +19,8 @@ function MyCollectionTable(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    // sweet alert
+    const MySwal = withReactContent(Swal)
 
     let history = useHistory()
 
@@ -140,7 +144,33 @@ function MyCollectionTable(props) {
                 <ClicktoCartButton />
             </td>
             <td className="align-middle" style={{textAlign: 'center',maxWidth:100}}>
-                <button 
+            <button
+                                            type="button" 
+                                            className="close w-remove" 
+                                            id="w-rrrmove" 
+                                            aria-label="Close" 
+                                            onClick={()=>{
+                                                MySwal.fire({
+                                                    title: '是否刪除訊息？',
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#3085d6',
+                                                    cancelButtonColor: '#d33',
+                                                    confirmButtonText: '是，我要刪除!'
+                                                    }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        Swal.fire(
+                                                        'Deleted!',
+                                                        deleteCollections(v.index),
+                                                        'success'
+                                                        )
+                                                    }
+                                                    })
+                                            }}
+                                            >
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                {/* <button 
                     type="button" 
                     className="close w-remove" 
                     id="w-rrrmove" 
@@ -166,7 +196,7 @@ function MyCollectionTable(props) {
                                                 否，回到我的收藏
                                             </Button>
                                             </Modal.Footer>
-                                        </Modal>
+                                        </Modal> */}
                                         
             </td>
         </tr>
