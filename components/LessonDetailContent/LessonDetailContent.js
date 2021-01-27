@@ -8,19 +8,20 @@ import axios from 'axios'
 
 function LessonDetailContent(props) {
     // console.log('id?',props.match.params.id)
+    console.log('hihihi',props.match.params.course_id)
     const id = props.match.params.id
-    console.log(props.match.params.id)
+    // console.log(props.match.params.id)
     let course_id = props.match.params.course_id
-    console.log('course_id',props.match.params.course_id)
-    const new_course_id = course_id.slice(1,2)
-    console.log(typeof(new_course_id))
+    // console.log('course_id',props.match.params.course_id)
+    // const new_course_id = course_id.slice(1,2)
+    // console.log(typeof(new_course_id))
     const [lessonDetail, setLessonDetail] = useState([])
 
 
     // test 
     // const {coursedata} = props
     useEffect(()=> {
-        axios.get(`http://localhost:3001/members/lesson/${new_course_id}`)
+        axios.get(`http://localhost:3001/members/lesson/${course_id}`)
         .then((response) => {
             console.log(response)
             if(response.data) {
@@ -85,7 +86,7 @@ function LessonDetailContent(props) {
                                 </tr>
                                 <tr>
                                     <th scope="row">預約狀態：</th>
-                                    <td className="w-booking-status">{lessonDetail.lesson_status}</td>
+                                    <td className="w-booking-status">{lessonDetail._id ? '已預約' : '取消預約'}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">上課地點：</th>

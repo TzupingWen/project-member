@@ -5,14 +5,14 @@ import {NavLink,useHistory,withRouter} from 'react-router-dom'
 import MyCollectionNone from '../MyCollectionNone/MyCollectionNone'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-
+import axios from 'axios'
 
 function MyCollectionTable(props) {
-    // console.log('hasprops?',props)
-    const id = props.match.params.id
+    const id = props.match.params.id //會員id
     // console.log('id???',id)
 
-    const [collections, setCollections] = useState([])
+    const [collections, setCollections] = useState([]) //該會員的收藏商品
+    const [data, setData] = useState([]) //放商品資料
     
     // sweet alert
     const MySwal = withReactContent(Swal)
@@ -21,19 +21,21 @@ function MyCollectionTable(props) {
     let history = useHistory()
 
 
-    async function deleteCollections(index){
-        // const member_id = 1
+    async function deleteCollections(index,product_id){
         try {
             const response = await fetch(
-                'http://localhost:3001/members/deleteCollections/' + index + '/' + id,
+                'http://localhost:3001/members/deleteCollections/' + index + '/' + id + '/' + product_id,
                 {
                     method:'delete'
                 }
             )
             if(response.ok){
                 // reload data
-                getCollections(id)
-                history.push('/member/MyCollections/'+ id)
+                setCollections(response.data)
+                setTimeout(()=>{
+                    window.location.replace('/member/mycollections/' + id)
+                },1000)
+                // history.push('/member/mycollections/'+ id)
                
             } 
         } catch(error) {
@@ -41,9 +43,15 @@ function MyCollectionTable(props) {
         }
     }
 
+    useEffect(()=>{
+        getMember(id)
+    },[])
 
+    useEffect(()=>{
+        getCollections()
+    },[collections])
 
-    async function getCollections(id){
+    async function getMember(id){
         try {
             const response = await fetch(
                 `http://localhost:3001/members/${id}`,
@@ -58,22 +66,39 @@ function MyCollectionTable(props) {
             if(response.ok){
                 const data = await response.json()
                 // data是該會員的所有資料
-                // console.log('data?:',data)
-                const datas = data.collections
-                // datas是該會員的所有收藏資料
-                // console.log('datas?:',datas)
-
+                console.log('data?',data)
+                let datas = data.collections.map((item)=> item.product_id)
+                console.log(datas)
+                
                 setCollections(datas)
+                // console.log(datas)
             } 
-        } catch {
-            alert('no data')
+        } catch(error) {
+            console.log('error:',error)
         }
     }
 
+    function getCollections() {
+        const data_arr = []
+            if(collections) {
+                collections.forEach((item)=> {
+                    axios.get(`http://localhost:3001/members/collections/${item}`)
+                    .then((response) => {                  
+                        data_arr.push(response.data)
+                        // console.log('test',response.data)
+                    }).then(()=> {
+                        const product_arr = collections.length || 0
+                        if(data_arr.length == product_arr) {
+                            setData(data_arr)
+                            console.log('final', data)
+                        }
+                    })
+                    .catch((err)=> console.log(err))
+                })
+            }
+            
+    }
 
-    useEffect(()=>{
-        getCollections(id)
-    },[])
 
     const display = (
         <>
@@ -88,9 +113,9 @@ function MyCollectionTable(props) {
                             </tr>
                         </thead>
                         <tbody className="w-mycollect-tablebody">
-                            {collections.map((v, i)=>{
+                            {data && data.map((v, i)=>{
             return(
-                <tr key={i}>
+                <tr>
             <td className="align-middle">
                 <img className="w-collect-pics" src={v.product_img} alt="" />                    
             </td>                                        
@@ -114,18 +139,18 @@ function MyCollectionTable(props) {
                                             aria-label="Close" 
                                             onClick={()=>{
                                                 MySwal.fire({
-                                                    title: '是否刪除收藏？',
+                                                    title: '是否移除收藏？',
                                                     icon: 'warning',
                                                     showCancelButton: true,
                                                     confirmButtonColor: '#3085d6',
                                                     cancelButtonColor: '#d33',
-                                                    confirmButtonText: '是，我要刪除!',
+                                                    confirmButtonText: '是，我要移除!',
                                                     cancelButtonText: '返回'
                                                     }).then((result) => {
                                                     if (result.isConfirmed) {
                                                         Swal.fire(
-                                                        'Deleted!',
-                                                        deleteCollections(v.index),
+                                                        '移除收藏!',
+                                                        deleteCollections(i,v._id),
                                                         'success'
                                                         )
                                                     }

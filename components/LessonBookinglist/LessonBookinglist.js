@@ -7,52 +7,59 @@ import withReactContent from 'sweetalert2-react-content'
 import axios from 'axios'
 
 function LessonBookinglist(props) {
-    const id = props.match.params.id
+    const id = props.match.params.id//會員ID
     // console.log('??',id)
     // let course_id = props.match.params.course_id
     // const new_course_id = course_id.slice(1,2)
 
 
-    const [lessonbookings, setLessonbookings] = useState([])
-    
+    const [lessonbookings, setLessonbookings] = useState([]) //放本會員的課程預約ID
+    const [data, setData] = useState([]) //放課程資料
+    // const courses = lessonbookings.map((item) => item.lesson_number)
+    // console.log(courses)
     // sweet alert
     const MySwal = withReactContent(Swal)
 
     let history = useHistory()
 
 
-    async function deleteCourse(index) {
+    async function deleteCourse(index,course_id) {
         try {
             const response = await fetch (
-                'http://localhost:3001/members/deleteCourse/' + index + '/' + id,
+                'http://localhost:3001/members/deleteCourse/' + index + '/' + id + '/' + course_id,
                 {
                     method:'delete',
                 }
             )
             if(response.ok){
                 // 重新載入
-                getCourse(id)
-
-                history.push('/member/lesson/' +id)
-                
+                // getCourse(id)
+                setLessonbookings(response.data)
+                setTimeout(()=>{
+                    // history.push('/member/lesson/' +id)
+                    window.location.replace('/member/lesson/' +id)
+                }, 1000)
+                // history.push('/member/lesson/' +id)
+                // window.location.replace()
             } 
         } catch(error) {
             console.log('error:',error)
         }
     }
 
+    //先取會員ID
     useEffect(()=> {
-        axios.get(`http://localhost:3001/members/lesson/${id}`)
-        .then((response) => {
-            console.log(response)
-            if(response.data) {
-                setLessonbookings(response.data)
-            }
-        })
-        .catch((err) => console.log(err))
+        getMember(id)
     },[])
 
-    async function getCourse(id){
+    //再取該會員的各筆的課程預約資料
+    useEffect(()=>{
+        getCourse()
+        // lessonbookings.forEach((item) => console.log(item))
+    },[lessonbookings])
+
+    //取各個會員資料
+    async function getMember(id){
         try {
             const response = await fetch(
                 `http://localhost:3001/members/${id}`,
@@ -66,21 +73,68 @@ function LessonBookinglist(props) {
             )
             if(response.ok){
                 const data = await response.json()
-                const datas = data.course_booking
+                // const datas = data.course_booking
+                let datas = data.course_booking.map((item)=> item.lesson_number)
+                // let new_datas = []
+                // datas.forEach((item)=> {
+                //     new_datas.push(item.slice(1,2))
+                // })
+                // console.log(new_datas)
                 // console.log('data?',data)
                 // console.log('datas?',datas[0].lesson_number)
-                console.log('datas?',datas.map((item) => item.lesson_number))
                 
+                // setLessonbookings(new_datas)
                 setLessonbookings(datas)
+                // console.log(datas)
             } 
         } catch(error) {
             console.log('error:',error)
         }
     }
 
-    useEffect(()=>{
-        getCourse(id)
-    },[])
+    // useEffect(()=>{
+    //     getCourse()
+    //     lessonbookings.forEach((item) => console.log(item))
+    // },[lessonbookings])
+
+    //取預約的課程資料
+     function getCourse() {
+        const data_arr = []
+        // const course_arr = lessonbookings.length || 0
+            console.log('hihihi',lessonbookings)
+            if(lessonbookings) {
+                lessonbookings.forEach((item)=> {
+                    axios.get(`http://localhost:3001/members/lesson/${item}`)
+                    .then((response) => {                  
+                        data_arr.push(response.data)
+                        // console.log('test',response.data)
+                    }).then(()=> {
+                        const course_arr = lessonbookings.length || 0
+                        if(data_arr.length == course_arr) {
+                            setData(data_arr)
+                            console.log('final', data)
+                        }
+                    })
+                    .catch((err)=> console.log(err))
+                })
+            }
+            
+        // lessonbookings.forEach((item)=> {
+        //     axios.get(`http://localhost:3001/members/lesson/${item}`)
+        //     .then((response) => {                  
+        //         data_arr.push(response.data)
+        //         // console.log('test',response.data)
+        //     }).then(()=> {
+        //         const course_arr = lessonbookings.length || 0
+        //         if(data_arr.length == course_arr) {
+        //             setData(data_arr)
+        //             console.log('final', data)
+        //          }
+        //     })
+        //     .catch((err)=> console.log(err))
+        // })
+    }
+
 
     const display = (
         <>
@@ -97,11 +151,11 @@ function LessonBookinglist(props) {
                             </tr>
                         </thead>
                         <tbody className="w-lessonbookinglisttbody">
-                        {lessonbookings.map((v,i)=>{
+                        {data && data.map((v,i)=>{
                             return(
-                                <tr key={i}>
+                                <tr>
                         {/* 課程No. */}
-                        <td className="align-middle">{v.lesson_number}</td>                    
+                        <td className="align-middle">{i+1}</td>                    
                         {/* 課程縮圖 */}
                         <td className="align-middle">      
                         <div>
@@ -117,11 +171,11 @@ function LessonBookinglist(props) {
                         {/* 課程費用 */}
                         <td className="align-middle" style={{color: '#838383'}}>NT$ {v.price}</td>                    
                         {/* 課程狀態 */}
-                        <td className="w-lessonstatus-booked align-middle">{v.lesson_status}</td>
+                        <td className="w-lessonstatus-booked align-middle">{lessonbookings? '已預約' : '已取消'}</td>
                         {/* 課程詳情&取消預約按鈕 */}
                         <td className="align-middle">
                         {/* <ClicktoLessonButton /> */}
-                        <NavLink to={`/member/lesson/${id}/lessondetail/${v.lesson_number}`} className="w-btn-lessondetail">課程詳情</NavLink>
+                        <NavLink to={`/member/lesson/${id}/lessondetail/${v._id}`} className="w-btn-lessondetail">課程詳情</NavLink>
                         <button
                                             type="button" 
                                             className="w-btn-cancellesson"  
@@ -137,8 +191,8 @@ function LessonBookinglist(props) {
                                                     }).then((result) => {
                                                     if (result.isConfirmed) {
                                                         Swal.fire(
-                                                        'Deleted!',
-                                                        deleteCourse(v.index),
+                                                        '取消成功!',
+                                                        deleteCourse(i,v._id),
                                                         'success'
                                                         )
                                                     }
