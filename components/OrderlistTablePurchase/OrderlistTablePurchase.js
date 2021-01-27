@@ -9,6 +9,12 @@ function OrderlistTablePurchase(props) {
     const id = props.match.params.id
     // console.log('id!',id)
 
+     // date
+     const year = new Date().getFullYear()
+     const month = '0'+ (new Date().getMonth()+1)
+     const date = new Date().getDate()
+     const today = year + '-' + month + '-' + date
+
     const [purchaseorders, setPurchaseorders] = useState([])
 
     async function getPurchase(id){
@@ -61,7 +67,7 @@ function OrderlistTablePurchase(props) {
                             {/* 訂單編號 */}
                             <td className="w-ordernumber align-middle">{v.order_purchasenumber}</td>
                             {/* 訂單日期 */}
-                            <td className="w-orderdate align-middle">{v.order_purchasedate}</td>                    
+                            <td className="w-orderdate align-middle">{today}</td>                    
                             {/* 訂單金額 */}
                             <td className="align-middle" style={{color: '#E58F80'}}>
                             {v.order_purchaseprice}

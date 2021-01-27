@@ -9,6 +9,12 @@ function OrderlistTableRental(props) {
     // console.log('id?',props.match.params.id)
     const id = props.match.params.id
 
+    // date
+    const year = new Date().getFullYear()
+    const month = '0'+ (new Date().getMonth()+1)
+    const date = new Date().getDate()
+    const today = year + '-' + month + '-' + date
+
     const [rentalorders, setRentalorders] = useState([])
 
     async function getRental(id){
@@ -67,7 +73,7 @@ function OrderlistTableRental(props) {
             {/* 訂單編號 */}
             <td className="w-ordernumber align-middle">{v.order_rentalnumber}</td>
             {/* 訂單日期 */}
-            <td className="w-orderdate align-middle">{v.order_rentaldate}</td>                    
+            <td className="w-orderdate align-middle">{today}</td>                    
             {/* 訂單金額 */}
             <td className="align-middle" style={{color: '#838383'}}>{v.order_rentalprice}</td>  
             <td className="align-middle">
