@@ -8,7 +8,8 @@ import LessonDetailContent from '../components/LessonDetailContent/LessonDetailC
 import {withRouter} from 'react-router-dom'
 
 function LessonDetail(props) {
-    const {isAuth} = props
+    // const {isAuth} = props
+    console.log('test?',props)
 
     return (
         <>
@@ -20,11 +21,10 @@ function LessonDetail(props) {
             <section className="w-wrapper d-flex">
             <div className="w-card">
                 <MemberAvatar />
-                <MemberContent />
+                <MemberContent id={props.id}/>
             </div>
             <div className="w-article">
-
-                <LessonDetailContent data={props} />  
+                <LessonDetailContent id={props.match.params.id} />  
             </div>
             </section>
         </>

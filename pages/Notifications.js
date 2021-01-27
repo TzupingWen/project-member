@@ -8,7 +8,8 @@ import MemberHeader from '../components/MemberHeader/MemberHeader'
 // import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
 
 function Notifications(props) {
-    const {isAuth} = props
+    // const {isAuth} = props
+    // console.log('test',props)
 
     return (
         <>
@@ -20,10 +21,10 @@ function Notifications(props) {
             <section className="w-wrapper d-flex">
             <div className="w-card">
                 <MemberAvatar />
-                <MemberContent />
+                <MemberContent id={props.id}/>
             </div>
             <div className="w-article">
-                <NotifyTabs />
+                <NotifyTabs id={props.match.params.id}/>
             </div>
             </section>
         </>

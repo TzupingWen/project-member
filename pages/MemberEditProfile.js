@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import {withRouter} from 'react-router-dom'
+import axios from 'axios'
 import './Member.scss'
 import MemberHeader from '../components/MemberHeader/MemberHeader'
 import MemberAvatar from '../components/MemberAvatar/MemberAvatar'
@@ -10,8 +12,8 @@ import ProfileEdit from '../components/ProfileEdit/ProfileEdit'
 // import ProfileEdittest from '../components/ProfileEdit/ProfileEdittest'
 
 function MemberEditProfile(props) {
-    const {isAuth} = props
-
+    console.log('hi',props)
+    console.log(props.match.params.id)
     return (
         <>
             <MemberHeader />
@@ -22,10 +24,10 @@ function MemberEditProfile(props) {
             <section className="w-wrapper d-flex">
             <div className="w-card">
                 <MemberAvatar />
-                <MemberContent />
+                <MemberContent  id={props.id}/>
             </div>
             <div className="w-article">
-                <ProfileEdit />
+                <ProfileEdit id={props.match.params.id} />
 
                 {/* --測試資料-- */}
                 {/* <ProfileEdittest /> */}
@@ -37,4 +39,4 @@ function MemberEditProfile(props) {
     )
 }
 
-export default MemberEditProfile
+export default withRouter(MemberEditProfile)

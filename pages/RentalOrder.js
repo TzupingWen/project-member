@@ -8,7 +8,9 @@ import {withRouter} from 'react-router-dom'
 // import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
 
 function RentalOrder(props) {
-    const {isAuth} = props
+    // const {isAuth} = props
+    // console.log('this?',props)
+    // console.log('id?',props.match.params.id)
 
     return (
         <>
@@ -20,10 +22,10 @@ function RentalOrder(props) {
             <section className="w-wrapper d-flex">
             <div className="w-card">
                 <MemberAvatar />
-                <MemberContent />
+                <MemberContent id={props.id}/>
             </div>
             <div className="w-article">
-                <OrderlistTableRental />
+                <OrderlistTableRental id={props.match.params.id}/>
             </div>
             </section>
         </>

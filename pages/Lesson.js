@@ -8,7 +8,7 @@ import LessonContent from '../components/LessonContent/LessonContent'
 import {withRouter} from 'react-router-dom'
 
 function Lesson(props) {
-    const {isAuth} = props
+    // console.log('props?',props)
 
     return (
         <>
@@ -22,10 +22,10 @@ function Lesson(props) {
             <section className="w-wrapper d-flex">
             <div className="w-card">
                 <MemberAvatar />
-                <MemberContent />
+                <MemberContent id={props.id}/>
             </div>
             <div className="w-article">
-                <LessonContent />
+                <LessonContent id={props.match.params.id} />
             </div>
             </section>
         </> 

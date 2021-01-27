@@ -3,7 +3,7 @@ import './MemberAvatar.scss'
 
 function MemberAvatar(props) {
     const [members, setMembers] = useState()
-    console.log('members?')
+    // console.log('members?')
     
     // async function getMembers() {
     //     try {

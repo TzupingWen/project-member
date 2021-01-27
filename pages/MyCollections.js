@@ -8,7 +8,10 @@ import './Member.scss'
 // import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
 
 function MyCollections(props) {
-    const {isAuth} = props
+    // const {isAuth} = props
+    // console.log('???',props)
+    const id = props.match.params.id
+    console.log('id?',id)
 
     return (
         <>
@@ -20,10 +23,10 @@ function MyCollections(props) {
         <section className="w-wrapper d-flex">
             <div className="w-card">
                 <MemberAvatar />
-                <MemberContent />
+                <MemberContent id={props.id}/>
             </div>
             <div className="w-article">
-                <MyCollectionContent />
+                <MyCollectionContent id={props.match.params.id}/>
             </div>
         </section>
         </>

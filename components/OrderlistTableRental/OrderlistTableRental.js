@@ -1,17 +1,20 @@
 import React, {useState,useEffect} from 'react'
 import './OrderlistTableRental.scss'
-import Pagination from '../Pagination/Pagination'
+// import Pagination from '../Pagination/Pagination'
 import ClicktoDetailButton from '../ClicktoDetailButton/ClicktoDetailButton'
-import { withRouter } from 'react-router-dom'
+import { withRouter,NavLink } from 'react-router-dom'
 
 
 function OrderlistTableRental(props) {
+    // console.log('id?',props.match.params.id)
+    const id = props.match.params.id
+
     const [rentalorders, setRentalorders] = useState([])
 
-    async function getMembers(){
+    async function getRental(id){
         try {
             const response = await fetch(
-                'http://localhost:3001/members',
+                `http://localhost:3001/members/${id}`,
                 {
                     method:'get',
                     headers: {
@@ -21,10 +24,11 @@ function OrderlistTableRental(props) {
                 }
             )
             if(response.ok){
+                // 取得會員以及他的租賃訂單
                 const data = await response.json()
-                const datas = data[0].user_rental
-
-                console.log(data)
+                const datas = data.user_rental
+                // console.log('data',data)
+                // console.log('datas',datas)
                 setRentalorders(datas)
                 
             } 
@@ -34,7 +38,7 @@ function OrderlistTableRental(props) {
     }
 
     useEffect(()=>{
-        getMembers()
+        getRental(id)
     },[])
 
     
@@ -66,7 +70,6 @@ function OrderlistTableRental(props) {
             <td className="w-orderdate align-middle">{v.order_rentaldate}</td>                    
             {/* 訂單金額 */}
             <td className="align-middle" style={{color: '#838383'}}>{v.order_rentalprice}</td>  
-            {/* 租賃訂單狀態-已預約color：#838383、租賃中：#E58F80、已完成：#A8AE91 */}
             <td className="align-middle">
             <div className="d-inline-block w-statusrental">{v.order_rentalstatus}</div>
             </td>                                        
@@ -79,7 +82,8 @@ function OrderlistTableRental(props) {
                 </td>
             {/* 訂單詳情button */}
             <td className="align-middle">    
-                <ClicktoDetailButton />
+                {/* 這個要連結到結帳流程後的訂單詳情頁面 */}
+                <NavLink to={`/member/rentalorder/${id}/`} className="w-btn-clicktodetail">訂單詳情</NavLink>
             </td>                    
             </tr>      
                         )
@@ -87,7 +91,7 @@ function OrderlistTableRental(props) {
         
                     </tbody>          
                     </table>
-                    <Pagination />
+                    {/* <Pagination /> */}
                 </div>
             </div>
         </>

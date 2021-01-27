@@ -3,12 +3,14 @@ const express = require('express')
 // const router = require('express').Router()
 const router = express.Router()
 const member = require('../models/members')
+const course = require('../models/courses')
 
 
 //query all member 
-router.get('/', async (req,res) =>{
-    const members = await member.find()
+router.get('/:id', async (req,res) =>{
+    const members = await member.findById({_id: req.params.id})
     res.json(members)
+    console.log(members)
 })
 //Create new member
 router.post('/add', async(req,res) => {
@@ -23,6 +25,11 @@ router.get('/get/:id', async(req,res) => {
     res.json(user);
 })
 
+router.get('/lesson/:course_id?', async(req, res) => {
+    const per_course = await course.findById({_id: req.params.course_id})
+    res.json(per_course)
+})
+
 router.get('/:id/:course_id', async(req,res) => {
     console.log('會員ID:' + req.params.id)
     console.log('課程ID:' + req.params.course_booking)
@@ -34,6 +41,8 @@ router.get('/:id/:course_id', async(req,res) => {
     // const keyword_data = await course.find({name: {$regex: req.params.keyword}, type: {$regex: req.params.type}})
     
 })
+
+
 
 
 //delete specific item

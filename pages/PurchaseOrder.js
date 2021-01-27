@@ -8,8 +8,10 @@ import {withRouter} from 'react-router-dom'
 // import MyBreadcrumb from '../components/MyBreadcrumb/MyBreadcrumb'
 
 function PurchaseOrder(props) {
-    const {isAuth} = props
-
+    console.log('props?',props)
+    const id = props.match.params.id
+    console.log('???',id)
+    
     return (
         <>
         <MemberHeader />
@@ -20,10 +22,10 @@ function PurchaseOrder(props) {
             <section className="w-wrapper d-flex">
             <div className="w-card">
                 <MemberAvatar />
-                <MemberContent />
+                <MemberContent id={props.id}/>
             </div>
             <div className="w-article">
-                <PurchaseOrderContent />
+                <PurchaseOrderContent id={props.match.params.id}/>
             </div>
             </section>
         </>

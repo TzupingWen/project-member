@@ -4,8 +4,8 @@ import './LessonContent.scss'
 import LessonBookinglist from '../LessonBookinglist/LessonBookinglist'
 import {withRouter} from 'react-router-dom'
 
-function LessonContent() {
-    const [data, setData] = useState(false)
+function LessonContent(props) {
+    console.log('props?',props)
 
     // const display = <LessonBookinglist />
     // const none = <LessonNone />
@@ -17,8 +17,7 @@ function LessonContent() {
             <p>課程預約管理</p>
         </div>
                 <div className="w-orderlist-main px-2">
-                    <LessonBookinglist />
-                    {/* <LessonNone /> */}
+                    <LessonBookinglist id={props.match.params.id}/>
                 </div>
             </div>
         </>

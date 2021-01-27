@@ -76,7 +76,7 @@
   ],
   "user_purchase": [
     {
-      "order_purchasenumber": "012021020201",
+      "order_purchasenumber": "012021020202",
       "order_purchasedate": "2021-02-03",
       "order_purchaseprice": "NT$2000",
       "order_purchasestatus": "待出貨",
@@ -86,7 +86,7 @@
   ],
   "course_booking": [
     {
-      "lesson_number": "01",
+      "lesson_number": 1,
       "name": "多肉玻璃屋手作課",
       "type": "succlent",
       "price": 2200,
@@ -121,23 +121,23 @@
   "notifications_account": [
     {
       "accountnotify_title": "【帳戶通知】",
-      "accountnotify_content": "您在2021年1月29日修改了個人檔案"
+      "accountnotify_content": "收藏了落地虎尾蘭盆栽"
     },
     {
       "accountnotify_title": "【帳戶通知】",
-      "accountnotify_content": "您在2020年12月10日修改了個人檔案"
+      "accountnotify_content": "修改了個人檔案"
     }
   ],
   "notifications_orders": [
     {
       "orderlistnotify_title": "【訂單通知】",
-      "orderlistnotify_content": "您在2021年1月29日訂購了琴葉榕大型植栽"
+      "orderlistnotify_content": "訂購了琴葉榕大型植栽"
     }
   ],
   "notifications_lesson": [
     {
       "lessonnotify_title": "【課程通知】",
-      "lessonnotify_content": "您在2021年1月29日預約了多肉玻璃屋手作課"
+      "lessonnotify_content": "預約了多肉玻璃屋手作課"
     }
   ],
   "member_account": "clorenzetto123456@cmu.edu",
@@ -188,7 +188,7 @@
   "collections": [
     {
       "product_id": "1",
-      "product_name": "落地虎尾蘭盆栽",
+      "product_name": "琴葉榕大型植栽",
       "product_category": "大型植栽",
       "occation_category": [
         "客廳空間布置",
@@ -237,7 +237,7 @@
   ],
   "course_booking": [
     {
-      "lesson_number": "01",
+      "lesson_number": 1,
       "name": "多肉玻璃屋手作課",
       "type": "succlent",
       "price": 2200,
@@ -272,19 +272,19 @@
   "notifications_account": [
     {
       "accountnotify_title": "【帳戶通知】",
-      "accountnotify_content": "您在2021年1月29日修改了個人檔案"
+      "accountnotify_content": "修改了個人檔案"
     }
   ],
   "notifications_orders": [
     {
       "orderlistnotify_title": "【訂單通知】",
-      "orderlistnotify_content": "您在2021年1月29日訂購了琴葉榕大型植栽"
+      "orderlistnotify_content": "訂購了琴葉榕大型植栽"
     }
   ],
   "notifications_lesson": [
     {
       "lessonnotify_title": "【課程通知】",
-      "lessonnotify_content": "您在2021年1月29日預約了多肉玻璃屋手作課"
+      "lessonnotify_content": "預約了多肉玻璃屋手作課"
     }
   ],
   "member_account": "dsamworth1@shutterfly.com",
@@ -295,5 +295,5 @@
   "member_birthdate": "1989-02-21",
   "member_address": "新竹市東區食品路69號",
   "member_avatar": "http://localhost:3000/images/member/male.png",
-  "__v": 0
+  "__v": 2
 }]
